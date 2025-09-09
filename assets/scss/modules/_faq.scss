@@ -1,0 +1,180 @@
+.accordion-button::after,
+.accordion-button:not(.collapsed)::after {
+    background: none;
+}
+.accordion-button::after {
+    font-family: "Material Symbols Rounded";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 32px;
+    content: "\e5cf";
+    width: 32px;
+    height: 33px;
+}
+
+.faq-page {
+    padding-top: 1rem;
+    .accordion-item {
+        border: none;
+    }
+    .accordion-button {
+        &:focus {
+            outline: none;
+            border: none;
+            box-shadow: none;
+        }
+    }
+    .card {
+        border: none;
+        border-radius: 0;
+        box-shadow: var(--box-shadow-lg);
+    }
+    .card-body {
+        padding: 1.25rem 1.75rem;
+    }
+}
+.faq-nav {
+    margin: 0 -10px;
+    margin-bottom: 1rem;
+    .nav-link {
+        color: var(--color-primary);
+        font-weight: var(--fw-bold);
+        text-align: center;
+        background-color: var(--color-primary-200);
+        height: 60px;
+        line-height: 60px;
+        padding: 0 1rem;
+    }
+    .nav-link.active,
+    .show > .nav-link {
+        color: var(--color-light);
+        background-color: var(--color-primary);
+    }
+    .nav-item {
+        padding: 0 10px;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.faq-accordion-i {
+    .accordion-button {
+        color: var(--color-primary);
+        background-color: var(--color-primary-200);
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-radius: var(--bs-accordion-border-radius);
+    }
+    .accordion-button:not(.collapsed) {
+        color: var(--color-light);
+        background-color: var(--color-primary);
+        box-shadow: none;
+    }
+
+    .accordion-body {
+        border: 1px solid var(--color-primary);
+        border-bottom-right-radius: var(--bs-accordion-border-radius);
+        border-bottom-left-radius: var(--bs-accordion-border-radius);
+        transition: all 200ms ease;
+        margin-top: -5px;
+        padding-top: 1.5rem;
+        .editor-content {
+            padding-top: 8px;
+        }
+    }
+    .faq-label {
+        position: relative;
+        top: -3px;
+    }
+}
+.faq-accordion-ii {
+    .icon {
+        width: 35px;
+        margin-right: 0.75rem;
+        > img {
+            margin: 0 auto;
+        }
+    }
+    .accordion-button {
+        color: var(--color-default);
+        padding: 1.5rem 0;
+    }
+    .accordion-button:not(.collapsed) {
+        background: transparent;
+    }
+    .accordion-body {
+        color: var(--color-secondary);
+        background-color: var(--color-secondary-300);
+        border-top: 1px solid var(--color-secondary);
+        border-bottom: 1px solid var(--color-secondary);
+        .editor-content {
+            p {
+                color: var(--color-secondary);
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .faq-nav .nav-link {
+        width: 200px;
+    }
+}
+@media (min-width: 1200px) {
+    .faq-nav .nav-link {
+        width: 300px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .faq-nav .nav-link {
+        height: 50px;
+        line-height: 50px;
+    }
+}
+@media (max-width: 991px) {
+    .faq-nav .nav-item {
+        width: calc(100% / 3);
+    }
+    .faq-nav .nav-link {
+        width: 100%;
+    }
+    .faq-nav .nav-link {
+        height: 44px;
+        line-height: 44px;
+    }
+}
+@media (max-width: 767px) {
+    .accordion-button::after {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .faq-page .card-body {
+        padding: 1rem;
+    }
+    .faq-accordion-ii .accordion-body .icon {
+        margin-bottom: 1rem;
+    }
+    .faq-accordion-ii .accordion-button {
+        padding: 1rem 0;
+    }
+}
+@media (max-width: 575px) {
+    .faq-nav .nav-item {
+        width: auto;
+    }
+    .faq-nav .nav-link {
+        width: 100%;
+    }
+    .faq-nav {
+        margin: 0 -8px;
+    }
+    .faq-nav .nav-item {
+        padding: 0 8px;
+        margin-bottom: 16px;
+    }
+    .faq-accordion-ii .icon {
+        width: 30px;
+    }
+}

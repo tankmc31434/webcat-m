@@ -1,0 +1,41 @@
+@import '../scss/configs/_mixin';
+@import '../scss/configs/_font';
+@import '../scss/configs/_feather';
+@import '../scss/configs/_variable';
+@import '../scss/configs/_base';
+
+@import '../scss/components/_breadcrumb';
+@import '../scss/components/_button';
+@import '../scss/components/_editor-content';
+@import '../scss/components/_form';
+@import '../scss/components/_select2';
+@import '../scss/components/_pagination';
+@import '../scss/components/_whead';
+@import '../scss/components/_modal';
+@import '../scss/components/_sweetalert';
+@import '../scss/components/_shape-divider';
+@import '../scss/components/_swiper';
+@import '../scss/components/_hero-banner';
+@import '../scss/components/_sidebar';
+@import '../scss/components/_cookie';
+
+@import '../scss/layouts/_header';
+@import '../scss/layouts/_footer';
+ 
+@import '../scss/modules/_default';
+@import '../scss/modules/_about';
+@import '../scss/modules/_activity';
+@import '../scss/modules/_banner';
+@import '../scss/modules/_news';
+@import '../scss/modules/_download';
+@import '../scss/modules/_weblink';
+@import '../scss/modules/_research';
+@import '../scss/modules/_courses-offered';
+@import '../scss/modules/_personnel';
+@import '../scss/modules/_student';
+@import '../scss/modules/_faq';
+@import '../scss/modules/_contact';
+@import '../scss/modules/_policy';
+@import '../scss/modules/_error';
+
+@import '../scss/layouts/_breakpoints';

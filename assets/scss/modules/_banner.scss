@@ -1,0 +1,46 @@
+.wg-banner {
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+    background-color: var(--color-primary-200);
+    @include clip-path-polygon(true, false);
+    .swiper-horizontal > .swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .swiper-pagination-custom,
+    .swiper-pagination-fraction {
+        bottom: 55px;
+    }
+    .cover {
+        padding-top: 33.333%;
+    }
+}
+
+@media (max-width: 1199px) {
+    .wg-banner {
+        padding-top: 8rem;
+        clip-path: polygon(0% 14%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+@media (max-width: 991px) {
+    .wg-banner {
+        padding-top: 6rem;
+        clip-path: polygon(0% 12%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+@media (max-width: 767px) {
+    .wg-banner {
+        padding-top: 4rem;
+        clip-path: polygon(0% 8%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+@media (max-width: 767px) {
+    .wg-banner {
+        padding-top: 3rem;
+        padding-bottom: 3.25rem;
+    }
+    .wg-banner .swiper-horizontal > .swiper-pagination-bullets,
+    .wg-banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .wg-banner .swiper-pagination-custom,
+    .wg-banner .swiper-pagination-fraction {
+        bottom: 34px;
+    }
+}

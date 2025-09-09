@@ -1,0 +1,119 @@
+.activity-news {
+    .activity-highlight {
+        .thumbnail {
+            width: 640px;
+        }
+        .inner {
+            padding-top: 0;
+            .tag {
+                margin-top: 1px;
+                margin-bottom: 1.5rem;
+            }
+            .title {
+                margin-bottom: 1.5rem;
+            }
+            .desc {
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+    .thumbnail {
+        .cover {
+            padding-top: 74.5%;
+        }
+    }
+    .inner {
+        padding-top: 1.25rem;
+        color: var(--color-default);
+        .tag {
+            margin-bottom: 1rem;
+        }
+        .title {
+            line-height: 1.4em;
+            margin-bottom: 1rem;
+            @include text-limit(2, 1.4em, min);
+        }
+        .desc {
+            margin-bottom: 1.25rem;
+            @include text-limit(5, 1.4em, min);
+        }
+        .date {
+        }
+    }
+}
+.activity-highlight {
+    position: relative;
+    .swiper {
+        padding-bottom: 3rem;
+        margin-bottom: 1.75rem;
+    }
+    .swiper-horizontal > .swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .swiper-pagination-custom,
+    .swiper-pagination-fraction {
+        bottom: 0;
+    }
+}
+.activity-list {
+    position: relative;
+    .swiper {
+        padding-bottom: 3rem;
+    }
+    .swiper-horizontal > .swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .swiper-pagination-custom,
+    .swiper-pagination-fraction {
+        bottom: 0;
+    }
+}
+
+@media (max-width: 1600px) {
+}
+
+@media (max-width: 1440px) {
+    .activity-news .activity-highlight .thumbnail {
+        width: 540px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .activity-news .activity-highlight .thumbnail {
+        width: 480px;
+    }
+    .activity-news .activity-highlight .inner .tag {
+        margin-bottom: 1rem;
+    }
+    .activity-news .activity-highlight .inner .title {
+        margin-bottom: 1rem;
+    }
+    .activity-news .activity-highlight .inner .desc {
+        margin-bottom: 1rem;
+        @include text-limit(4, 1.4em, min);
+    }
+    .activity-news .inner .desc {
+        @include text-limit(3, 1.4em, min);
+    }
+}
+
+@media (max-width: 991px) {
+    .activity-news .activity-highlight .thumbnail {
+        width: 100%;
+    }
+    .activity-news .activity-highlight .inner .desc {
+        @include text-limit(3, 1.4em, min);
+    }
+}
+
+@media (max-width: 767px) {
+    .activity-news .inner,
+    .activity-news .activity-highlight .inner {
+        padding-top: 1rem;
+    }
+    .activity-news .inner .title {
+        min-height: unset;
+        @include text-limit(2, 1.4em, max);
+    }
+}
+
+@media (max-width: 575px) {
+}

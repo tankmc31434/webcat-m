@@ -1,0 +1,75 @@
+.wg-about {
+    color: var(--color-light);
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+    // margin-top: -11%;
+    margin-top: -196px;
+    background: linear-gradient(#960 0%, #e6b102 86.21%, #fdc703 100%);
+    // clip-path: polygon(0% 200px, 100% 0%, 100% 100%, 0% 100%);
+    @include clip-path-polygon(true, false);
+    .qoute {
+        font-size: var(--typo-lg);
+        font-weight: var(--fw-bold);
+        line-height: 1.2em;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+    }
+    .action {
+        margin-top: 3rem;
+    }
+}
+
+// @media (max-width: 1600px) {
+// }
+
+// @media (max-width: 1440px) {
+// }
+
+@media (max-width: 1199px) {
+    .wg-about .qoute {
+        margin-bottom: 0;
+    }
+    .wg-about .action {
+        margin-top: 2rem;
+    }
+    .wg-about {
+        padding-top: 5rem;
+        margin-top: -180px;
+        clip-path: polygon(0% 14%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+
+@media (max-width: 991px) {
+    .wg-about {
+        padding-top: 4rem;
+        margin-top: -145px;
+        clip-path: polygon(0% 12%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+
+@media (max-width: 767px) {
+    .wg-about .action {
+        margin-top: 1.5rem;
+    }
+    .wg-about {
+        padding-top: 4rem;
+        margin-top: -90px;
+        clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    .wg-about .title,
+    .wg-about .desc,
+    .wg-about .action {
+        text-align: center;
+    }
+    .wg-about .action {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .wg-about {
+        padding-top: 3rem;
+        margin-top: -40px;
+        clip-path: polygon(0% 4%, 100% 0%, 100% 100%, 0% 100%);
+      }
+}

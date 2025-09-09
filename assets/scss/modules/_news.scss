@@ -1,0 +1,178 @@
+$highlight-slide-width: calc((1280px + 16px) * ((100% - 70%) / 100%));
+$highlight-slide-active-width: calc((1280px + 16px) * ((100% - 60%) / 100%));
+
+.wg-highlight-news {
+    overflow: hidden;
+    .thumbnail {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        .cover {
+            transition: all 200ms ease;
+            padding-bottom: 75%;
+        }
+    }
+    .card {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+    }
+    .card-body {
+        .title {
+            @include text-limit(2, 1.4em, min);
+            margin-bottom: 10px;
+        }
+        .desc {
+            @include text-limit(3, 1.4em, min);
+        }
+        .date {
+            margin-bottom: 0;
+        }
+    }
+    .swiper {
+        overflow: visible;
+        padding-bottom: 3rem;
+        margin-left: -20px;
+        margin-right: -20px;
+        .swiper-slide {
+            .link {
+                height: 642px;
+                display: flex;
+                align-items: center;
+                &:hover {
+                    .cover {
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+        // .swiper-wrapper {
+        //     .swiper-slide:last-child {
+        //         margin-right: 0;
+        //     }
+        //     .swiper-slide:last-child:not(.swiper-slide-next) {
+        //         margin-right: $highlight-slide-width;
+        //     }
+        // }
+    }
+    .swiper-slide {
+        padding: 0 20px;
+        width: $highlight-slide-width;
+        opacity: 0;
+        visibility: hidden;
+        @include transition(all, 200ms, ease);
+    }
+    .swiper-slide-active {
+        width: $highlight-slide-active-width;
+    }
+    .swiper-slide.swiper-slide-active,
+    .swiper-slide.swiper-slide-next,
+    .swiper-slide.swiper-slide-next + .swiper-slide {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.news-page {
+    .wg-highlight-news {
+        margin-bottom: 3rem;
+    }
+    .news-list {
+        // margin-bottom: 3rem;
+        .item-list {
+            margin: 0 -10px;
+        }
+        li {
+            width: 25%;
+            padding:0 10px;
+            margin-bottom: 3rem;
+            .thumbnail .cover {
+                padding-top: 65%;
+            }
+            .card {
+                background: transparent;
+                border: none;
+                border-radius: 0;
+            }
+            .card-body {
+                .title {
+                    @include text-limit(2, 1.4em, min);
+                    margin-bottom: 10px;
+                }
+                .desc {
+                    @include text-limit(3, 1.4em, min);
+                }
+                .date {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1600px) {
+}
+
+@media (max-width: 1400px) {
+    $highlight-slide-active-width: calc((1140px + 16px) * ((100% - 60%) / 100%));
+    $highlight-slide-width: calc((1140px + 16px) * ((100% - 70%) / 100%));
+
+    .wg-highlight-news .swiper-slide {
+        width: $highlight-slide-width;
+    }
+    .wg-highlight-news .swiper-slide-active {
+        width: $highlight-slide-active-width;
+    }
+}
+
+@media (max-width: 1199px) {
+    .wg-highlight-news .swiper {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .wg-highlight-news .swiper-slide {
+        padding: 0;
+    }
+    .wg-highlight-news .swiper .swiper-slide .link {
+        height: auto;
+        display: block;
+    }
+    .news-page .news-list .item-list {
+        margin: 0 -8px;
+    }
+    .news-page .news-list li {
+        padding: 0 8px;
+    }
+}
+
+@media (max-width: 991px) {
+    .news-page .news-list li {
+        width: 33.33%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .news-page .news-list li {
+        width: 50%;
+    }
+    .news-page .news-list .item-list {
+        margin: 0 -5px;
+    }
+    .news-page .news-list li {
+        padding: 0 5px;
+    }
+    .default-tab {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .news-page .wg-highlight-news {
+        margin-bottom: 1.5rem;
+    }
+    .news-page .news-list li {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+}

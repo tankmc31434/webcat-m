@@ -1,0 +1,111 @@
+// .personnel-page {
+// }
+
+.personnel-list {
+    + .personnel-list {
+        margin-top: 2rem;
+    }
+    .link {
+        cursor: pointer;
+        .action a {
+            text-decoration: none;
+            &:last-child {
+                display: block;
+                padding-top: .5rem;
+            }
+        }
+    }
+    .card {
+        border: none;
+        border-radius: 0;
+        overflow: hidden;
+    }
+    .card-body {
+        position: relative;
+        z-index: 1;
+    }
+    .inner {
+        background: var(--color-secondary-300);
+        min-height: 200px;
+        .title {
+            margin-bottom: 0.25rem;
+        }
+        .position {
+            margin-bottom: 1rem;
+        }
+    }
+    .action {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // display: flex;
+        display: block;
+        justify-content: center;
+        background: transparent;
+        background: rgba($color: #5637b8, $alpha: 0.7);
+        padding-top: calc(60% - 50px);
+        transform: translateY(100%);
+        @include transition(all, 500ms, ease);
+        .btn {
+            display: flex;
+            align-items: center;
+            color: var(--color-light);
+            background-color: var(--color-secondary-100);
+            font-size: var(--typo-xs);
+            .icon {
+                width: 16px;
+                margin-right: 8px;
+            }
+        }
+    }
+    .link {
+        &:focus,
+        &:hover {
+            .action {
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+@media (min-width: 576px) {
+    .personnel-list .inner .position {
+        @include text-limit(2, 1.4em, min);
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 1600px) {
+}
+
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1199px) {
+    .personnel-list .action .btn .icon {
+        width: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+    .personnel-list .inner {
+        min-height: 156px;
+    }
+    .personnel-list .action {
+        padding-top: calc(92% - 44px);
+    }
+    .personnel-list .action .btn .icon {
+        width: 14px;
+    }
+}
+
+@media (max-width: 575px) {
+    .personnel-list .inner {
+        min-height: 1px;
+    }
+}

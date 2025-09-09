@@ -1,0 +1,124 @@
+$pagination-size: 40px;
+
+.pagination-block {
+    margin-top: 4.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    margin: 0;
+    .link {
+        display: block;
+        min-width: $pagination-size;
+        height: $pagination-size;
+        padding: 0 5px;
+        margin: calc($pagination-size / 4) 0;
+        text-align: center;
+        line-height: calc($pagination-size - 2px);
+        border-radius: 50%;
+        background-color: transparent;
+        font-weight: var(--fw-normal);
+        font-size: var(--typo-md);
+        color: var(--color-default);
+        border: 1px solid var(--color-border);
+        &:hover {
+            color: var(--color-primary);
+        }
+        span {
+            position: relative;
+            font-size: 26px;
+            line-height: calc($pagination-size - 2px);
+        }
+        &.link-text {
+            border-color: transparent;
+            background-color: transparent;
+            &:hover {
+                border-color: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+    li {
+        display: inline-block;
+        vertical-align: middle;
+        &.active {
+            .link {
+                color: var(--color-default);
+                font-weight: var(--fw-bold);
+                border-color: var(--color-primary-100);
+                min-width: calc($pagination-size * 1.5);
+                height: calc($pagination-size * 1.5);
+                line-height: calc(($pagination-size - 2px) * 1.5);
+                margin: 0;
+            }
+        }
+        &.disabled {
+            .link {
+                cursor: default;
+                opacity: 0.5;
+            }
+        }
+    }
+    li + li {
+        margin-left: 10px;
+    }
+    .first-page,
+    .last-page,
+    .prev-page,
+    .next-page,
+    .dots-page {
+        .link {
+            border-color: transparent;
+        }
+    }
+}
+
+@media (max-width: 1199px) {
+    .pagination-block {
+        margin-top: 4rem;
+    }
+}
+@media (max-width: 991px) {
+    .pagination-block {
+        margin-top: 3.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    $pagination-size: 36px;
+
+    .pagination-block {
+        margin-top: 2.5rem;
+    }
+    .pagination .link {
+        min-width: $pagination-size;
+        height: $pagination-size;
+        line-height: calc($pagination-size - 2px);
+        margin: calc($pagination-size / 8) 0;
+    }
+    .pagination li.active .link {
+        min-width: calc($pagination-size * 1.25);
+        height: calc($pagination-size * 1.25);
+        line-height: calc(($pagination-size - 2px) * 1.25);
+    }
+    .pagination li + li {
+        margin-left: 8px;
+    }
+    .pagination .first-page .link,
+    .pagination .last-page .link,
+    .pagination .prev-page .link,
+    .pagination .next-page .link,
+    .pagination .dots-page .link {
+        min-width: 18px;
+        padding: 0 2px;
+    }
+    .pagination .link span {
+        font-size: 24px;
+    }
+}
+@media (max-width: 575px) {
+    .pagination .link span {
+        font-size: 22px;
+    }
+}

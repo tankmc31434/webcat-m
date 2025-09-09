@@ -1,0 +1,187 @@
+.btn {
+	background: none;
+	position: relative;
+	padding: 0 20px;
+	min-width: 120px;
+	height: 50px;
+	line-height: 48px;
+	border: 1px solid transparent;
+	border-radius: 0;
+	font-size: var(--typo-default);
+	font-weight: var(--fw-normal);
+	&.fluid {
+		min-width: inherit;
+		width: 100%;
+	}
+	&:focus {
+		box-shadow: none;
+	}
+	&.btn-xs {
+	}
+	&.btn-sm {
+		height: 40px;
+		line-height: 38px;
+	}
+	&.btn-lg {
+	}
+}
+
+.btn:not(:disabled):not(.disabled).active:focus,
+.btn:not(:disabled):not(.disabled):active:focus,
+.show > .btn.dropdown-toggle:focus {
+	box-shadow: none;
+}
+
+.btn-primary,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+	position: relative;
+	color: #fff;
+	background-color: transparent;
+	border-color: transparent;
+	overflow: hidden;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(var(--color-primary), var(--color-primary-100));
+		z-index: -1;
+	}
+}
+.btn-primary:hover,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary:active:focus,
+.btn-primary.actitve:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.btn-primary:focus:hover,
+.btn-primary.focus:hover {
+	color: #fff;
+	background-color: var(--color-primary);
+	border-color: transparent;
+}
+.btn-primary.disabled,
+.btn-primary.disabled:hover {
+	color: #fff;
+	background-color: var(--color-primary);
+	border-color: transparent;
+	opacity: 0.5;
+}
+
+.btn-outline-primary,
+.btn-outline-primary:focus,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.show > .btn-outline-primary.dropdown-toggle {
+	color: var(--color-primary);
+	background-color: #fff;
+	border-color: var(--color-primary);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:active:hover,
+.btn-outline-primary.active:hover,
+.btn-outline-primary:active:focus,
+.btn-outline-primary.actitve:focus,
+.btn-outline-primary:active.focus,
+.btn-outline-primary.active.focus,
+.btn-outline-primary:focus:hover,
+.btn-outline-primary.focus:hover {
+	color: #fff;
+	background-color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+.btn-outline-primary.disabled,
+.btn-outline-primary.disabled:hover {
+	color: #fff;
+	background-color: var(--color-primary);
+	border-color: transparent;
+	opacity: 0.5;
+}
+
+.btn-secondary,
+.btn-secondary:focus,
+.btn-secondary.focus,
+.btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-secondary.dropdown-toggle {
+	position: relative;
+	color: #fff;
+	background-color: transparent;
+	border-color: transparent;
+	overflow: hidden;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(var(--color-secondary-200), var(--color-secondary));
+		z-index: -1;
+	}
+}
+.btn-secondary:hover,
+.btn-secondary:active:hover,
+.btn-secondary.active:hover,
+.btn-secondary:active:focus,
+.btn-secondary.actitve:focus,
+.btn-secondary:active.focus,
+.btn-secondary.active.focus,
+.btn-secondary:focus:hover,
+.btn-secondary.focus:hover {
+	color: #fff;
+	background-color: var(--color-secondary);
+	border-color: transparent;
+}
+.btn-secondary.disabled,
+.btn-secondary.disabled:hover {
+	opacity: 0.5;
+}
+
+.btn-outline-secondary,
+.btn-outline-secondary:focus,
+.btn-outline-secondary.focus,
+.btn-outline-secondary:not(:disabled):not(.disabled).active,
+.btn-outline-secondary:not(:disabled):not(.disabled):active,
+.show > .btn-outline-secondary.dropdown-toggle {
+	position: relative;
+	color: var(--color-secondary);
+	background-color: #fff;
+	border-color: var(--color-secondary);
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:active:hover,
+.btn-outline-secondary.active:hover,
+.btn-outline-secondary:active:focus,
+.btn-outline-secondary.actitve:focus,
+.btn-outline-secondary:active.focus,
+.btn-outline-secondary.active.focus,
+.btn-outline-secondary:focus:hover,
+.btn-outline-secondary.focus:hover {
+	color: #fff;
+	background-color: var(--color-secondary);
+	border-color: transparent;
+}
+.btn-outline-secondary.disabled,
+.btn-outline-secondary.disabled:hover {
+	opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+	.btn {
+		height: 44px;
+		line-height: 42px;
+	}
+	.btn.btn-sm {
+		height: 36px;
+		line-height: 34px;
+	}
+}

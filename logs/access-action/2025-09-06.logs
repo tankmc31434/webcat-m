@@ -1,0 +1,13 @@
+Insert Member|:|janfjmi8u7ha2b8fsro3kfpj2e|:|http://localhost/webcat-main/admin/member/insert.php|:|::1|:|2025-09-06 12:37:44
+Delete Member|:|janfjmi8u7ha2b8fsro3kfpj2e|:|http://localhost/webcat-main/admin/member/delete.php|:|::1|:|2025-09-06 13:36:29
+Delete Member|:|janfjmi8u7ha2b8fsro3kfpj2e|:|http://localhost/webcat-main/admin/member/delete.php|:|::1|:|2025-09-06 13:36:33
+Delete Member|:|janfjmi8u7ha2b8fsro3kfpj2e|:|http://localhost/webcat-main/admin/member/delete.php|:|::1|:|2025-09-06 13:36:37
+Delete Member|:|janfjmi8u7ha2b8fsro3kfpj2e|:|http://localhost/webcat-main/admin/member/delete.php|:|::1|:|2025-09-06 13:36:40
+Delete Member|:|u9tuirkdaaclbkh2pfuud48kte|:|http://localhost/webcat-main/admin/member/delete.php|:|::1|:|2025-09-06 14:50:13
+Delete Annouce|:|u9tuirkdaaclbkh2pfuud48kte|:|http://localhost/webcat-main/admin/announce/delete.php|:|::1|:|2025-09-06 14:51:26
+Update Annouce|:|sf70lgnv5vldfr4ltkhad1l1sr|:|http://localhost:3000/admin/announce/update.php|:|::1|:|2025-09-06 20:08:22
+Delete Annouce|:|sf70lgnv5vldfr4ltkhad1l1sr|:|http://localhost:3000/admin/announce/delete.php|:|::1|:|2025-09-06 20:08:30
+Delete Annouce|:|sf70lgnv5vldfr4ltkhad1l1sr|:|http://localhost:3000/admin/announce/delete.php|:|::1|:|2025-09-06 20:08:58
+Update Tracking|:|sf70lgnv5vldfr4ltkhad1l1sr|:|http://localhost:3000/admin/track/update.php|:|::1|:|2025-09-06 20:15:07
+Delete Tracking|:|sf70lgnv5vldfr4ltkhad1l1sr|:|http://localhost:3000/admin/track/delete.php|:|::1|:|2025-09-06 20:25:06
+Update Clinic|:|sf70lgnv5vldfr4ltkhad1l1sr|:|http://localhost:3000/admin/clinic/update.php|:|::1|:|2025-09-06 20:26:10

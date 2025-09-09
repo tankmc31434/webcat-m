@@ -1,0 +1,89 @@
+.hero-banner {
+    position: relative;
+    background-color: var(--color-secondary-200);
+    // margin-bottom: 2rem;
+    .wrapper {
+        display: block;
+        position: relative;
+    }
+    .cover,
+    .cover-vdo {
+        padding-top: 34%;
+    }
+    .swiper {
+        @include clip-path-polygon;
+    }
+    .swiper-horizontal > .swiper-pagination-bullets,
+    .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .swiper-pagination-custom,
+    .swiper-pagination-fraction {
+        bottom: 0;
+    }
+    .hero-txt {
+        position: absolute;
+        // top: 0;
+        left: 0;
+        right: 0;
+        bottom: 12%;
+        .title {
+            font-size: var(--typo-h);
+            font-weight: var(--fw-bold);
+            line-height: 1.4em;
+            @include text-gradient(var(--color-primary), var(--color-primary-100));
+            @include text-stroke(transparent, 2px, #ffffff);
+        }
+        .subtitle {
+            font-size: var(--typo-xxl);
+            font-weight: var(--fw-bold);
+            @include text-gradient(#a65cce, #c66bd7);
+            @include text-stroke(transparent, 1.5px, #ffffff);
+        }
+    }
+    // .shape-divider-triangle-bottom {
+    //     z-index: 2;
+    // }
+}
+
+@media (max-width: 1600px) {
+    .hero-banner .swiper-horizontal > .swiper-pagination-bullets,
+    .hero-banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .hero-banner .swiper-pagination-custom,
+    .hero-banner .swiper-pagination-fraction {
+        bottom: -10px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .hero-banner .swiper-horizontal > .swiper-pagination-bullets,
+    .hero-banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .hero-banner .swiper-pagination-custom,
+    .hero-banner .swiper-pagination-fraction {
+        bottom: -15px;
+    }
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 767px) {
+    .hero-banner .cover,
+    .hero-banner .cover-vdo {
+        padding-top: 400px;
+    }
+    .hero-banner .swiper-horizontal > .swiper-pagination-bullets,
+    .hero-banner .swiper-pagination-bullets.swiper-pagination-horizontal,
+    .hero-banner .swiper-pagination-custom,
+    .hero-banner .swiper-pagination-fraction {
+        bottom: -20px;
+    }
+    .hero-banner .hero-txt .title,
+    .hero-banner .hero-txt .subtitle {
+        -webkit-text-stroke-width: 1px;
+    }
+}
+
+@media (max-width: 575px) {
+}

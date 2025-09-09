@@ -1,0 +1,15 @@
+.whead{
+	margin-bottom: 20px;
+	.h-title{
+		font-size: var(--typo-xxl);
+		font-weight: var(--fw-bold); 
+		line-height: 1.4em;
+		margin: 0; 
+	}
+	.title{
+		font-size: var(--typo-xl); 
+		font-weight: var(--fw-bold); 
+		line-height: 1.2em;
+		margin: 0; 
+	}
+}

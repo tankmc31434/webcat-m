@@ -1,0 +1,48 @@
+.select2-container .select2-selection--single {
+    height: 50px;
+    border-radius: 0;
+    border-color: var(--color-border);
+}
+
+.select2-container--default .select2-dropdown {
+    border-color: var(--color-border);
+    border-radius: 0;
+}
+.select2-container--default .select2-results__option {
+    padding: 0.75rem 1rem;
+    line-height: 1.4em;
+}
+.select2-container--default .select2-results__option[aria-selected="true"] {
+    background-color: var(--color-primary-200);
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--color-primary);
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 50px;
+    padding-left: 1rem;
+    padding-right: 2rem;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    width: 35px;
+    height: 50px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow::before {
+    position: relative;
+    font-family: 'Material Symbols Rounded';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 26px;
+    content: "\e5cf";
+    line-height: 50px;
+    transition: all 200ms ease;
+    // padding: 0 6px;
+}
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow::before {
+    content: "\e5ce";
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    display: none;
+}

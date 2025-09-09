@@ -1,0 +1,249 @@
+.wg-download-doc {
+    padding-top: 3rem;
+    padding-bottom: 15rem;
+    background: var(--color-secondary-300);
+    // @include clip-path-polygon(false, true);
+    .nav-default {
+        align-items: baseline;
+        .nav-link {
+            color: var(--color-secondary);
+            &.active {
+                border-bottom-color: var(--color-secondary-200);
+            }
+        }
+        .nav-link:focus,
+        .nav-link:hover {
+            border-bottom-color: var(--color-secondary-100);
+        }
+        &.nav-fill .nav-item,
+        &.nav-fill > .nav-link {
+            width: calc(100% / 4);
+        }
+    }
+}
+
+.sub-group-doc {
+    .nav {
+        margin-top: 0.5rem;
+        .nav-item {
+            position: relative;
+            margin: 0.75rem 0;
+            &:not(:last-child) {
+                &::after {
+                    content: "";
+                    position: relative;
+                    display: inline-block;
+                    height: 100%;
+                    width: 1px;
+                    background-color: var(--color-secondary-200);
+                    margin: 0 2rem;
+                }
+            }
+            .nav-link {
+                display: inline-block;
+            }
+        }
+    }
+    .nav-link {
+        color: var(--color-secondary);
+        line-height: 1;
+        padding: 0;
+        // margin: 0.75rem 0;
+        &.active {
+            font-weight: var(--fw-bold);
+        }
+    }
+}
+
+.download-doc-list {
+    > .card {
+        border: none;
+        border-radius: 0;
+        box-shadow: var(--box-shadow-lg);
+    }
+    .item-list {
+        > li + li {
+            border-top: 1px solid var(--color-border);
+            // margin-top: -1px;
+        }
+    }
+    .link {
+        .icon {
+            width: 45px;
+            > svg {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .title {
+            @include text-limit(2, 1.4em, max);
+        }
+        .date {
+            color: var(--color-secondary);
+            width: 140px;
+            text-align: right;
+        }
+        .action {
+            .btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .icon {
+                    width: 17px;
+                    margin-right: 8px;
+                }
+                &:hover {
+                    .icon {
+                        filter: invert(1) grayscale(1) brightness(100);
+                    }
+                }
+            }
+        }
+        .card {
+            position: relative;
+            border-radius: 0;
+            border: none;
+            z-index: 1;
+            @include transition(all, 200ms, ease);
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(var(--color-secondary) 0%, var(--color-secondary-200) 100%);
+                z-index: -1;
+                opacity: 0;
+                visibility: hidden;
+                @include transition(all, 200ms, ease);
+            }
+        }
+        .card-body {
+            padding: 1.5rem 1.25rem;
+        }
+        &:hover,
+        &:active {
+            .card {
+                &::before {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            .title,
+            .date {
+                color: var(--color-light);
+            }
+            .icon {
+                > svg {
+                    path {
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
+    .scroll-wrapper {
+        height: 540px;
+    }
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        height: auto;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 1rem 0;
+        padding-right: 1.5rem;
+    }
+    .swiper-scrollbar.swiper-scrollbar-vertical,
+    .swiper-vertical > .swiper-scrollbar {
+        width: 4px;
+        top: 3%;
+        right: 16px;
+        height: 94%;
+    }
+}
+
+@media (max-width: 1600px) {
+}
+
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1199px) {
+    .download-doc-list .link .date {
+        width: 120px;
+    }
+}
+
+@media (max-width: 991px) {
+    .wg-download-doc {
+        padding-bottom: 12rem;
+    }
+    .download-doc-list .link .date {
+        width: 110px;
+    }
+    .sub-group-doc .nav {
+        flex-wrap: nowrap;
+        white-space: nowrap;
+    }
+    .sub-group-doc .nav .nav-item {
+        margin: 0.25rem 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .wg-download-doc {
+        padding-top: 2rem;
+    }
+    .wg-download-doc .nav-default {
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        margin-bottom: 0.75rem;
+    }
+    .wg-download-doc .nav-default.nav-fill .nav-item,
+    .wg-download-doc .nav-default.nav-fill > .nav-link {
+        width: auto;
+    }
+    .wg-download-doc {
+        padding-bottom: 8rem;
+    }
+    .wg-download-doc .sub-group-doc .nav .nav-item:not(:last-child)::after {
+        margin: 0 1.5rem;
+    }
+    .download-doc-list .link .icon {
+        width: 30px;
+    }
+    .download-doc-list .scroll-wrapper {
+        height: 446px;
+    }
+    .download-doc-list .link .date {
+        width: auto;
+        text-align: left;
+        margin-top: 6px;
+    }
+    .download-doc-list .link .date,
+    .download-doc-list .link .action {
+        padding-left: 46px;
+    }
+    .download-doc-list .link .action {
+        margin-top: 10px;
+    }
+    .download-doc-list .link .card-body {
+        padding: 1.25rem 1rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .wg-download-doc {
+        padding-bottom: 5rem;
+    }
+    .wg-download-doc .sub-group-doc .nav .nav-item:not(:last-child)::after {
+        margin: 0 1.25rem;
+    }
+    .download-doc-list .link .action .btn {
+        width: 100%;
+    }
+}

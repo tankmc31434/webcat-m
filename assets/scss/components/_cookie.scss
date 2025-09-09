@@ -1,0 +1,102 @@
+.cookie-tab {
+    background-color: rgba(86, 55, 184, 0.4);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    .h-tap {
+        padding: 1.25rem 0;
+        //     height: 140px;
+    }
+    .icon-pdpa {
+        position: relative;
+    }
+    .text {
+        font-weight: normal;
+        // font-size: 24px;
+        text-align: left;
+        color: var(--color-light);
+        line-height: 1.4em;
+    }
+    .link-cookie-policy {
+        color: var(--color-secondary-200);
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .action {
+        display: flex;
+        .btn {
+            display: block;
+            width: 150px;
+            font-weight: var(--fw-bold);
+            text-align: center;
+            + .btn {
+                margin-left: 15px;
+            }
+        }
+    }
+}
+
+@media (max-width: 1440px) {
+}
+@media (max-width: 1199px) {
+    // .cookie-tab .h-tap {
+    //     height: 100px;
+    // }
+    .cookie-tab .icon-pdpa {
+        width: 60px;
+    }
+    .cookie-tab .action .btn {
+        width: 120px;
+        // height: 40px;
+        // line-height: 40px;
+        // font-size: 22px;
+    }
+    .cookie-tab .text {
+        font-size: 16px;
+    }
+}
+@media (max-width: 991px) {
+    .cookie-tab .action {
+        display: block;
+    }
+    .cookie-tab .action .btn + .btn {
+        margin-left: 0px;
+        margin-top: 5px;
+    }
+}
+@media (max-width: 767px) {
+    .cookie-tab .h-tap {
+        height: auto;
+        padding: 15px 0 15px 60px;
+        position: relative;
+    }
+    .cookie-tab .h-tap > div:nth-child(1) {
+        position: absolute;
+        top: 15px;
+        left: 0px;
+    }
+    .cookie-tab .icon-pdpa {
+        width: 50px;
+    }
+    .cookie-tab .text {
+        font-size: 14px;
+    }
+    .cookie-tab .action {
+        display: flex;
+        padding-top: 10px;
+    }
+    .cookie-tab .action .btn {
+        width: 100px;
+        height: 44px;
+        line-height: 42px;
+        // font-size: 18px;
+    }
+    .cookie-tab .action .btn + .btn {
+        margin-left: 10px;
+        margin-top: 0px;
+    }
+}

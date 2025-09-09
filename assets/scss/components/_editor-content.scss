@@ -1,0 +1,102 @@
+.editor-content {
+	// margin: 3rem 0;
+	p {
+		font-size: var(--typo-default);
+		color: var(--color-default);
+		line-height: 1.4em;
+		margin-bottom: 20px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	img {
+		height: auto !important;
+	}
+	ol,
+	ul {
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+		> li {
+			+ li {
+				margin-top: 0.5rem;
+			}
+		}
+	}
+	.faculty {
+		.faculty-resolution {
+			.card {
+				background: transparent;
+				border: none;
+				border-radius: 0;
+				.thumbnail .cover {
+					padding-bottom: 75%;
+				}
+				.card-body {
+					text-align: center;
+					min-height: 250px;
+					background: linear-gradient(360deg, var(--color-secondary), var(--color-secondary-200));
+					padding: 1.5rem 0;
+
+					.card-text {
+						font-size: 28px;
+						line-height: 1.3em;
+					}
+				}
+			}
+		}
+		.faculty-shared-values {
+			.item-list li {
+				margin-top: 0;
+				text-indent: 4em;
+			}
+		}
+		.faculty-producing-graduates {
+			
+		}
+		.faculty-meaning {
+			.card {
+				background: transparent;
+				border: none;
+				border-radius: 0;
+				background-color: var(--color-secondary-300);
+			}
+		}
+	}
+}
+
+@media (max-width: 1199px) {
+	// .editor-content {
+	// 	margin: 2rem 0;
+	// }
+	.editor-content .faculty .faculty-resolution .card .card-body .card-text {
+		font-size: var(--typo-lg);
+	}
+	.editor-content .faculty .faculty-resolution .card .card-body {
+		min-height: 220px;
+	}
+}
+@media (max-width: 991px) {
+	.editor-content .faculty .faculty-resolution .card .card-body {
+		min-height: 205px;
+	} 
+}
+
+
+@media (max-width: 767px) {
+	.editor-content .faculty .faculty-resolution .card .card-body {
+		min-height: 190px;
+	}
+}
+
+@media (max-width: 575px) {
+	.editor-content .faculty .faculty-resolution .card .card-body .card-text br {
+		display: none;
+	}
+	.editor-content .faculty .faculty-resolution .card .card-body {
+		min-height: unset;
+		max-height: inherit;
+		padding: 1.5rem;
+	}
+}

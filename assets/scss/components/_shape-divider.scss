@@ -1,0 +1,39 @@
+.shape-divider-triangle-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 50px;
+    }
+    .shape-fill {
+        fill: #fff;
+    }
+}
+
+@media (max-width: 1600px) {
+    .shape-divider-triangle-bottom svg {
+        height: 40px;
+    }
+}
+@media (max-width: 1440px) {
+    .shape-divider-triangle-bottom svg {
+        height: 36px;
+    }
+}
+@media (max-width: 1199px) {
+    .shape-divider-triangle-bottom svg {
+        height: 28px;
+    }
+}
+@media (max-width: 575px) {
+    .shape-divider-triangle-bottom svg {
+        height: 30px;
+    }
+}
