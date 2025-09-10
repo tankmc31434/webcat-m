@@ -159,7 +159,7 @@
                                             <div class="title-bottom">
                                                 <div class="row align-items-center gutters-10">
                                                     <div class="col">
-                                                        <div class="card-txt text-limit -x2">ขอความช่วยเหลือ</div>
+                                                        <div class="card-txt text-limit -x2">แจ้งสัตว์เลี้ยงสูญหาย</div>
                                                     </div>
                                                     <div class="col-auto">
                                                         <span class="material-symbols-rounded">chevron_right</span>
