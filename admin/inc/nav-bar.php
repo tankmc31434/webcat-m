@@ -45,7 +45,7 @@
                         <div class="text-center m-t-30">
                             <? $lglink = "http://".$_SERVER['HTTP_HOST']."/webcat/admin/logout.php"; ?>
                             <a href="#"
-                                class="btn waves-effect waves-light btn-success hidden-md-down" onclick="checkLogoutUser('<? echo $lglink ?>')"> log out</a>
+                                class="btn waves-effect waves-light btn-success hidden-md-down" onclick="checkLogoutUser('<? echo $lglink ?>')"> ออกจากระบบ</a>
                         </div>
                     </ul>
                 </nav>

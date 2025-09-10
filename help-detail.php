@@ -62,9 +62,9 @@ $db->close();
             <div class="default-header">
                 <div class="wrapper">
                     <div class="container">
-                        <div class="title  text-center">ขอความช่วยเหลือ</div>
+                        <div class="title  text-center">แจ้งสัตว์เลี้ยงสูญหาย</div>
                         <div class="text-center">
-                            <a href="index.php" class="link" style="color:white;">หน้าหลัก</a><span style="color:white;"> > ขอความช่วยเหลือ</span>
+                            <a href="index.php" class="link" style="color:white;">หน้าหลัก</a><span style="color:white;"> >แจ้งสัตว์เลี้ยงสูญหาย</span>
                         </div>
 
 
@@ -73,7 +73,6 @@ $db->close();
                 <figure class="cover">
                     <img class="img-cover" src="<?php echo $core_template; ?>assets/img/background/bg-home.png" alt="bg-home">
                 </figure>
-<!-- ช้สำหรับแสดงรายละเอียดการขอความช่วยเหลือสัตว์เลี้ยงหายแต่ละรายการ เช่น ข้อมูลสัตว์, รูปภาพ, จุดสังเกต, บริเวณหาย และเนื้อหาเพิ่มเติม -->
             </div>
             <div class="default-page news-page pb-0" style="margin: 2rem 0;">
                 <div class="detail-body">

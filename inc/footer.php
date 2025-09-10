@@ -2,20 +2,20 @@
     <div class="f-content lazy" data-src="<?php echo $core_template; ?>assets/img/background/bg-home.png">
         <div class="container-xl">
             <div class="sitemap">
-                <h3 class="title fw-bold typo-md mb-4">แผนผังเว็บไซต์</h3>
+                <h3 class="title fw-bold typo-md mb-4">PetTracking</h3>
                 <div class="row gy-md-5 gy-4">
                     <div class="col-md-3 col-sm-4 col-12">
                     <a href="index.php" class="link typo-xxs" title=""><h4 class="subtitle fw-bold typo-default mb-2">หน้าหลัก</h4></a>
                     </div>
                     <div class="col-md-3 col-sm-4 col-12">
-                    <a href="announce.php" class="link typo-xxs" title=""><h4 class="subtitle fw-bold typo-default mb-2">ประกาศข่าวสาร</h4></a>
+                    <a href="announce.php" class="link typo-xxs" title=""><h4 class="subtitle fw-bold typo-default mb-2">ข่าวสาร</h4></a>
                     </div>
                     <div class="col-md-3 col-sm-4 col-12">
                     <a href="" class="link typo-xxs" title=""><h4 class="subtitle fw-bold typo-default mb-2">วิเคราะห์โรค</h4></a>
                     </div>
                     <div class="col-md-3 col-sm-4 col-12">
                         <a href="help.php" class="link typo-xxs" title="">
-                            <h4 class="subtitle fw-bold typo-default mb-2">ขอความช่วยเหลือ</h4>
+                            <h4 class="subtitle fw-bold typo-default mb-2">แจ้งสัตว์เลี้ยงสูญหาย</h4>
                         </a>
                     </div>
                     <div class="col-md-3 col-sm-4 col-12">
