@@ -210,7 +210,7 @@ include('../lib/session.php');
                                             <h2><? echo $title ?> <b><? echo $description ?></b></h2>
                                         </div>
                                         <div class="col-sm-4">
-                                            <button type="button" class="btn btn-info add-new float-right" onclick="location.href='add.php'"><i class="fa fa-plus"></i> Add New</button>
+                                            <button type="button" class="btn btn-info add-new float-right" onclick="location.href='add.php'"><i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -219,11 +219,10 @@ include('../lib/session.php');
                                                 <tr>
                                                     <th width="4%">#</th>
                                                     <th width="22%">ชื่อ</th>
-                                                    
-                                                    
-                                                <th width="12%" class="text-center">เวลาที่อัพเดท</th>
-                                                <th width="12%" class="text-center">วันที่อัพเดท</th>
-                                              
+                                                    <th width="8%" class="text-center">สถานะ</th>
+                                                    <th width="8%" class="text-center">วันที่สร้าง</th>
+                                                    <th width="8%" class="text-center">เวลาที่อัพเดท</th>
+                                                    <th width="12%" class="text-center">จัดการ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -235,7 +234,7 @@ include('../lib/session.php');
                                                 $slect_data[$table  . "_pic as " . substr("_pic", 1)] = "";
                                                 $slect_data[$table  . "_status as " . substr("_status", 1)] = "";
                                                 $slect_data[$table  . "_credate as " . substr("_credate", 1)] = "";
-
+                                                $slect_data[$table  . "_lastdate as " . substr("_lastdate", 1)] = "";
 
                                                 $sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table;
 
@@ -278,7 +277,7 @@ include('../lib/session.php');
                                                         $valName = $row[1];
                                                         $valStatus = $row[3];
                                                         $valDateCredate = dateFormatReal($row[4]);
-                                                        $valTimeCredate = timeFormatReal($row[4]);
+                                                        $valTimeCredate = timeFormatReal($row[5]);
                                                         $valPic = $mod_path_office . "/" . $row[2];
                                                         if (is_file($valPic)) {
                                                             $valPic = $valPic;
@@ -286,17 +285,13 @@ include('../lib/session.php');
                                                             $valPic = "../assets/images/nopic.png";
                                                         }
 
-                                                      if ($valStatus == "Approve") {
-    $valStatusClass = "fontContantTbEnable";
-    $valStatusText = "อนุมัติ"; // ภาษาไทย
-} else if ($valStatus == "Denine" || $valStatus == "Deny") {
-    $valStatusClass = "fontContantTbDisable";
-    $valStatusText = "ปฏิเสธ"; // ภาษาไทย
-} else {
-    $valStatusClass = "fontContantTbSuccess";
-    $valStatusText = "สำเร็จ"; // ภาษาไทย
-}
-
+                                                        if ($valStatus == "Approve") {
+                                                            $valStatusClass = "fontContantTbEnable";
+                                                        } else if ($valStatus == "Denine"){
+                                                            $valStatusClass = "fontContantTbDisable";
+                                                        } else{
+                                                            $valStatusClass = "fontContantTbSuccess";
+                                                        }
 
                                                         
                                                 ?>
@@ -306,13 +301,23 @@ include('../lib/session.php');
                                                             <td><?php echo $index ?> <img style="margin-left:15px; width:29px; height:29px;  background:url(<?php echo  $valPic ?>) left center no-repeat; background-size: cover;background-repeat: no-repeat; border-radius: 50%;  "></td>
                                                             <td><?php echo $valName ?></td>
                                                             <td class="text-center">
-    <div id="load_status<?php echo $valID; ?>">
-        <span class="<?php echo $valStatusClass; ?>">
-            
-        </span>
-    </div>
-</td>
+                                                                <div id="load_status<?php echo  $valID ?>">
+                                                                    <?php if ($valStatus == "Approve") { ?>
+
+                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"><span class="<?php echo  $valStatusClass ?>">อนุมัติ</span></a>
+                                                                    <?php } else if ($valStatus == "Denine"){ ?>
+
+                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"> <span class="<?php echo  $valStatusClass ?>">ไม่อนุมัติ</span> </a>
+
+                                                                    <?php } else { ?>
+                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"> <span class="<?php echo  $valStatusClass ?>">สำเร็จ</span> </a>
+                                                                        <?php } ?>
+
+                                                                    <img src="../img/loader/ajax-loaderstatus.gif" alt="waiting" style="display:none;" id="load_waiting<?php echo  $valID ?>" />
+                                                                </div>
+                                                            </td>
                                                             <td class="text-center"><?php echo $valDateCredate ?></td>
+                                                            <td class="text-center"><?php echo $valTimeCredate ?></td>
                                                             <td class="text-center">
                                                                 <a class="view" title="View" data-toggle="tooltip" onclick="
                                                                 document.myForm.selectid.value=<?php echo  $valID ?>;
@@ -347,9 +352,9 @@ include('../lib/session.php');
                                                 <?php if ($module_pageshow > 1) {
                                                     $valPrePage = $module_pageshow - 1;
                                                 ?>
-                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valPrePage ?>'; document.myForm.submit();">Previous</button></li>
+                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valPrePage ?>'; document.myForm.submit();">ก่อนหน้า</button></li>
                                                 <?php } else { ?>
-                                                    <li class="page-item"><button class="page-link dis-mod" disabled>Previous</button></li>
+                                                    <li class="page-item"><button class="page-link dis-mod" disabled>ก่อนหน้า</button></li>
                                                 <?php } ?>
                                                 <?php
                                                 $limitpage = $module_pageshow + 3;
@@ -363,9 +368,9 @@ include('../lib/session.php');
                                                 <?php if ($module_pageshow < $numberofpage) {
                                                     $valNextPage = $module_pageshow + 1;
                                                 ?>
-                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valNextPage ?>'; document.myForm.submit();">Next</button></li>
+                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valNextPage ?>'; document.myForm.submit();">ถัดไป</button></li>
                                                 <?php } else { ?>
-                                                    <li class="page-item"><button class="page-link dis-mod" disabled>Next</button></li>
+                                                    <li class="page-item"><button class="page-link dis-mod" disabled>ถัดไป</button></li>
                                                 <?php } ?>
                                             </ul>
                                         </nav>

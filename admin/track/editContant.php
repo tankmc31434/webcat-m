@@ -19,7 +19,7 @@ $slect_data[$table  . "_spot as " . substr("_spot", 1)] = "";
 
 $slect_data[$table  . "_pic as " . substr("_pic", 1)] = "";
 $slect_data[$table  . "_file as " . substr("_file", 1)] = "";
-
+$slect_data[$table  . "_email as " . substr("_email", 1)] = "";
 $sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table;
 $sql .= " WHERE track_id = '" . $_REQUEST['selectid'] . "'";
 // print_pre($sql);
@@ -42,6 +42,7 @@ $valPic = $mod_path_office . "/" . $row[7];
 // }
 $valHtml = $path_html . "/" .$row[8];
 $valhtmlname = $row[8];
+$valEmail = $row[9];
 
 ?>
 
@@ -121,6 +122,31 @@ $valhtmlname = $row[8];
             width: 30px;
             height: 30px;
         }
+        #preview img {
+      width: 100px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .image-box {
+      display: inline-block;
+      position: relative;
+      margin: 5px;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+    }
     </style>
 
 </head>
@@ -227,7 +253,11 @@ $valhtmlname = $row[8];
                                     <div class="row my-3">
                                         <div class="col-sm-6">
                                             <h4>เพศ :</h4>
-                                            <input  value="<?php echo $valSex ?>" type="text" name="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
+                                            <select  type="text" name="sex" id="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
+                                                <option value="" <?php if($valSex == ""){ ?> selected  <?php } ?>>เลือกประเภทสัตว์เลี้ยง</option>
+                                                <option value="M" <?php if($valSex == "M"){ ?> selected  <?php } ?>>เพศผู้</option>
+                                                <option value="F" <?php if($valSex == "F"){ ?> selected  <?php } ?>>เพศเมีย</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <h4>สายพันธุ์ :</h4>
@@ -251,6 +281,47 @@ $valhtmlname = $row[8];
                                                     <img src="../assets/images/nopic.png" style="max-height: 350px;max-width: 450px" class="imgadd rounded mx-auto d-block" alt="...">
                                                 <?php } ?>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อัลบั้ม :</h4>
+                                            <div>
+                                                <input type="file" id="images" multiple accept="image/*">
+                                                <input type="button" value="Upload" onclick="uploadAlbum();">
+                                                <div id="status"></div>
+                                                <div id="preview">
+                                                    <?php
+                                                    // โหลดรูปจาก DB มาแสดงตอนเปิดหน้า
+                                                    $sqlalbum = "SELECT * FROM albumtrack WHERE albumtrack_containid = ".$valID." ORDER BY albumtrack_id DESC";
+                                                    $result = QueryDB($coreLanguageSQL, $sqlalbum);
+                                                    $count_record = NumRowsDB($coreLanguageSQL, $result);
+                                                    $index = 1;
+                                                    if ($count_record > 0) {
+                                                        
+                                                        while ($index < $count_record + 1) {
+                                                            $rowalbum = FetchArrayDB($coreLanguageSQL, $result);
+                                                            $id = $rowalbum['albumtrack_id'];
+                                                            $filename = $rowalbum['albumtrack_filename'];
+                                                            $path = "../../upload/track/album/" . $filename;
+                                                            echo "<div class='image-box' id='img-box-$id'>
+                                                            <img src='$path' alt='$filename' style=\"max-height: 350px;max-width: 450px\">
+                                                            <i class=\"material-icons btn-delete\" onclick=\"deleteImage($id, '$filename');\">remove</i>
+                                                            </div>";
+                                                            $index++;
+                                                        }
+                                                    } else {
+                                                        echo "<p>No images yet.</p>";
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อีเมลติดต่อ<span class="fontContantAlert"></span> :</h4>
+                                            <input  value="<?php echo $valEmail ?>" type="text" name="email" id="email" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
                                         </div>
                                     </div>
                                     <div class="row my-3">
@@ -478,6 +549,59 @@ $valhtmlname = $row[8];
                     console.log(html);
                 }
             });
+        }
+
+        function uploadAlbum() {
+            let files = document.getElementById("images").files;
+            if (files.length === 0) {
+                alert("Please select at least one image!");
+                return;
+            }
+            if (files.length > 5) {
+                alert("You can upload maximum 5 images only!");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("myid", document.getElementById('selectid').value); // ส่ง myid ไปด้วย
+            for (let i = 0; i < files.length; i++) {
+                formData.append("images[]", files[i]);
+            }
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "uploadAlbumuedit.php", true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("preview").innerHTML += this.responseText;
+                } else {
+                    document.getElementById("status").innerHTML = "Upload failed!";
+                }
+            };
+
+            xhr.send(formData);
+        };
+
+        // ฟังก์ชันลบรูป
+        function deleteImage(id, filename) {
+            if (!confirm("Delete this image?")) return;
+            let formData = new FormData();
+            formData.append("id", id);
+            formData.append("filename", filename);
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "deleteAlbumedit.php", true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("img-box-" + id).remove();
+                } else {
+                    alert("Delete failed!");
+                }
+            };
+
+            xhr.send(formData);
         }
     </script>
 </body>

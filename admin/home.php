@@ -87,13 +87,13 @@ $valAn = getAn();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Dashboard</h4>
+                        <h4 class="text-themecolor">แดชบอร์ด</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">หน้าหลัก</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">แดชบอร์ด</li>
                             </ol>
                         </div>
                     </div>
@@ -198,8 +198,8 @@ $valAn = getAn();
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div>
-                                        <h5 class="card-title">Logs</h5>
-                                        <h6 class="card-subtitle">Check your logs </h6>
+                                        <h5 class="card-title">บันทึก</h5>
+                                        <h6 class="card-subtitle">เช็คประวัติการจัดการเว็บไซต์ </h6>
                                     </div>
                                     <!-- <div class="ml-auto">
                                         <select class="custom-select b-0">
@@ -216,9 +216,10 @@ $valAn = getAn();
                                     <thead>
                                         <tr>
                                             <th width="4%" class="text-center">#</th>
-                                            <th width="20%" class="text-center">ACTION</th>
-                                            <th width="20%" class="text-center">TYPE</th>
-                                            <th width="16%" class="text-center">DATE</th>
+                                            <th width="20%" class="text-center">การกระทำ</th>
+                                            <th width="20%" class="text-center">ประเภท</th>
+                                            <th width="8%" class="text-center">วันที่</th>
+                                            <th width="8%" class="text-center">เวลา</th>
                                             <th width="20%" class="text-center">IP</th>
                                             <th width="20%" class="text-center">SESSION_ID</th>
                                         </tr>
@@ -245,6 +246,7 @@ $valAn = getAn();
                                                 <td class="txt-oflo text-center"><? echo $value['action'] ?></td>
                                                 <td class="txt-oflo text-center"><? echo $value['type'] ?></td>
                                                 <td class="txt-oflo text-center"><? echo dateFormatReal($value['time']) ?></td>
+                                                <td class="txt-oflo text-center"><? echo timeFormatReal($value['time']) ?></td>
                                                 <td class="txt-oflo text-center"><? echo $value['ip'] ?></td>
                                                 <td class="text-center"><span class="text-success"><? echo $value['sessid'] ?></span></td>
                                             </tr>

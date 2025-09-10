@@ -8,20 +8,20 @@ if ($_REQUEST['execute'] == "insert") {
 	// $randomNumber = rand(1111, 9999);
 
 	if (!is_dir($path_html)) {
-        mkdir($path_html, 0777);
-    }
+		mkdir($path_html, 0777);
+	}
 
-    if (@file_exists($path_html . "/" . $htmlfiledelete)) {
-        @unlink($path_html . "/" . $htmlfiledelete);
-    }
-    if ($_POST['inputHtml'] != "") {
-        $filename = $randomNumber . "-" . $randomNumber . ".html";
-        $HTMLToolContent = str_replace("\\\"", "\"", $_POST['inputHtml']);
-        $fp = fopen($path_html . "/" . $filename, "w");
-        chmod($path_html . "/" . $filename, 0777);
-        fwrite($fp, $HTMLToolContent);
-        fclose($fp);
-    }
+	if (@file_exists($path_html . "/" . $htmlfiledelete)) {
+		@unlink($path_html . "/" . $htmlfiledelete);
+	}
+	if ($_POST['inputHtml'] != "") {
+		$filename = $randomNumber . "-" . $randomNumber . ".html";
+		$HTMLToolContent = str_replace("\\\"", "\"", $_POST['inputHtml']);
+		$fp = fopen($path_html . "/" . $filename, "w");
+		chmod($path_html . "/" . $filename, 0777);
+		fwrite($fp, $HTMLToolContent);
+		fclose($fp);
+	}
 
 	$update = array();
 	$update[] = $table . "_subject='" . $_POST["subject"] . "'";
@@ -30,10 +30,10 @@ if ($_REQUEST['execute'] == "insert") {
 	$update[] = $table . "_gene='" . $_POST['gene'] . "'";
 	$update[] = $table . "_area='" . $_POST["area"] . "'";
 	$update[] = $table . "_spot='" . $_POST['spot'] . "'";
-
+	$update[] = $table . "_email='" . $_POST['email'] . "'";
 
 	$update[] = $table . "_pic='" . $_POST["filename"] . "'";
-	$update[] = $table . "_file='" . $filename. "'";
+	$update[] = $table . "_file='" . $filename . "'";
 
 	$update[] = $table . "_lastdate=NOW()";
 

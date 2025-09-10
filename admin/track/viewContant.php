@@ -19,7 +19,7 @@ $slect_data[$table  . "_spot as " . substr("_spot", 1)] = "";
 
 $slect_data[$table  . "_pic as " . substr("_pic", 1)] = "";
 $slect_data[$table  . "_file as " . substr("_file", 1)] = "";
-
+$slect_data[$table  . "_email as " . substr("_email", 1)] = "";
 $sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table;
 $sql .= " WHERE track_id = '" . $_REQUEST['selectid'] . "'";
 // print_pre($sql);
@@ -40,7 +40,13 @@ if (is_file($valPic)) {
     $valPic = "../assets/images/nopic.png";
 }
 $valHtml = $path_html . "/" .$row[8];
+$valEmail = $row[9];
 
+if ($valSex = 'M') {
+    $valSexText = 'เพศผู้';
+} else {
+    $valSexText = 'เพศเมีย';
+}
 ?>
 
 
@@ -118,6 +124,31 @@ $valHtml = $path_html . "/" .$row[8];
             width: 30px;
             height: 30px;
         }
+        #preview img {
+      width: 250px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .image-box {
+      display: inline-block;
+      position: relative;
+      margin: 5px;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+    }
     </style>
 </head>
 
@@ -217,7 +248,7 @@ $valHtml = $path_html . "/" .$row[8];
                                     <div class="row my-3">
                                         <div class="col-sm-6">
                                             <h4>เพศ :</h4>
-                                            <input disabled value="<?php echo $valSex ?>" type="text" name="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
+                                            <input disabled value="<?php echo $valSexText ?>" type="text" name="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
                                         </div>
                                         <div class="col-sm-6">
                                             <h4>สายพันธุ์ :</h4>
@@ -230,6 +261,44 @@ $valHtml = $path_html . "/" .$row[8];
                                             <div class="image" id="img">
                                                 <img src="<? echo $valPic ?>" style="max-height: 350px;max-width: 450px" class="imgadd rounded mx-auto d-block" alt="...">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อัลบั้ม :</h4>
+                                            <div>
+                                                <div id="preview">
+                                                    <?php
+                                                    // โหลดรูปจาก DB มาแสดงตอนเปิดหน้า
+                                                    $sqlalbum = "SELECT * FROM albumtrack WHERE albumtrack_containid = ".$valID." ORDER BY albumtrack_id DESC";
+                                                    $result = QueryDB($coreLanguageSQL, $sqlalbum);
+                                                    $count_record = NumRowsDB($coreLanguageSQL, $result);
+                                                    $index = 1;
+                                                    if ($count_record > 0) {
+                                                        
+                                                        while ($index < $count_record + 1) {
+                                                            $rowalbum = FetchArrayDB($coreLanguageSQL, $result);
+                                                            $id = $rowalbum['albumtrack_id'];
+                                                            $filename = $rowalbum['albumtrack_filename'];
+                                                            $path = "../../upload/track/album/" . $filename;
+                                                            echo "<div class='image-box' id='img-box-$id'>
+                                                            <img src='$path' alt='$filename' style=\"max-height: 350px;max-width: 450px\">
+                                                            
+                                                            </div>";
+                                                            $index++;
+                                                        }
+                                                    } else {
+                                                        echo "<p>No images yet.</p>";
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อีเมลติดต่อ<span class="fontContantAlert"></span> :</h4>
+                                            <input disabled value="<?php echo $valEmail ?>" type="text" name="email" id="email" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
                                         </div>
                                     </div>
                                     <div class="row my-3">

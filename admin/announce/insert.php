@@ -30,7 +30,7 @@ if ($_REQUEST['execute'] == "insert") {
     $insert[$table . "_file"] = "'" . $filename . "'";
     $insert[$table . "_credate"] = "NOW()";
     $insert[$table . "_lastdate"] = "NOW()";
-    $insert[$table . "_status"] = "'Disable'";
+    $insert[$table . "_status"] = "'Enable'";
 
     
 

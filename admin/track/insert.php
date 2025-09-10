@@ -6,7 +6,8 @@ include("./config.php");
 
 if ($_REQUEST['execute'] == "insert") {
     $randomNumber = rand(1111, 9999);
-
+    $myid = $_REQUEST['myid'];
+      
     if (!is_dir($path_html)) {
         mkdir($path_html, 0777);
     }
@@ -30,17 +31,27 @@ if ($_REQUEST['execute'] == "insert") {
     $insert[$table . "_gene"] = "'" . $_REQUEST['gene'] . "'";
     $insert[$table . "_area"] = "'" . $_REQUEST['area'] . "'";
     $insert[$table . "_spot"] = "'" . $_REQUEST['spot'] . "'";
-    
+    $insert[$table . "_email"] = "'" . $_REQUEST['email'] . "'";
     $insert[$table . "_pic"] = "'" . $_REQUEST['filename'] . "'";
     $insert[$table . "_file"] = "'" . $filename . "'";
     $insert[$table . "_credate"] = "NOW()";
     $insert[$table . "_lastdate"] = "NOW()";
-    $insert[$table . "_status"] = "'Denine'";
+    $insert[$table . "_status"] = "'Approve'";
 
-    
-    
+
+
     $sql = "INSERT INTO " . $table . "(" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
     $Query = $db->Execute($sql);
+     $insertid = $db->Insert_ID();
+    $sqlalbum = "INSERT INTO albumtrack (albumtrack_filename, albumtrack_containid) SELECT temptrack_filename, temptrack_containid FROM temptrack WHERE temptrack_containid = '$myid'";
+    
+    $QueryAlbum = $db->Execute($sqlalbum);
+   
+    $sqlupdate = "UPDATE albumtrack SET albumtrack_containid = '$insertid' WHERE albumtrack_containid = '$myid'";
+    $Queryupdate = $db->Execute($sqlupdate); 
+
+    $sqltemp = "DELETE FORM temptrack WHEN temptrack_containid = ''$myid'";
+    $Querytemp = $db->Execute($sqltemp);
 
     logs_access('Insert Tracking');
 }

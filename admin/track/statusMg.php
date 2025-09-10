@@ -13,17 +13,20 @@ $filestatus = $_POST['Valuefilestatus'];
 
 if ($statusname == "Approve") {
     $inputstatusname = "Denine";
+    $statusoutput = "ไม่อนุมัติ";
 } else if ($statusname == "Denine") {
     $inputstatusname = "Success";
+    $statusoutput = "สำเร็จ";
 } else if ($statusname == "Success") {
     $inputstatusname = "Approve";
+    $statusoutput = "อนุมัติ";
 }
 
 
 $sql = "UPDATE " . $tablename . " SET "
     . $tablename . "_status= '$inputstatusname' ";
 
-if ($statusname == "Success"){
+if ($statusname == "Denine"){
     $sql .= ",". $tablename . "_lastdate= NOW() ";
 }
 
@@ -33,12 +36,12 @@ $Query = QueryDB($coreLanguageSQL, $sql);
 
 ?>
 <?php if ($inputstatusname == "Approve") { ?>
-    <a href="javascript:void(0)" onclick="changeStatus('<?php echo $loaddder ?>','<?php echo $tablename ?>','<?php echo $inputstatusname ?>','<?php echo $statusid ?>','<?php echo $loadderstatus ?>','<?php echo $filestatus ?>')"><span class="fontContantTbEnable"><?php echo $inputstatusname ?></span></a>
+    <a href="javascript:void(0)" onclick="changeStatus('<?php echo $loaddder ?>','<?php echo $tablename ?>','<?php echo $inputstatusname ?>','<?php echo $statusid ?>','<?php echo $loadderstatus ?>','<?php echo $filestatus ?>')"><span class="fontContantTbEnable"><?php echo $statusoutput ?></span></a>
 
 <?php } else if ($inputstatusname == "Denine") { ?>
-    <a href="javascript:void(0)" onclick="changeStatus('<?php echo $loaddder ?>','<?php echo $tablename ?>','<?php echo $inputstatusname ?>','<?php echo $statusid ?>','<?php echo $loadderstatus ?>','<?php echo $filestatus ?>')"><span class="fontContantTbDisable"><?php echo $inputstatusname ?></span></a>
+    <a href="javascript:void(0)" onclick="changeStatus('<?php echo $loaddder ?>','<?php echo $tablename ?>','<?php echo $inputstatusname ?>','<?php echo $statusid ?>','<?php echo $loadderstatus ?>','<?php echo $filestatus ?>')"><span class="fontContantTbDisable"><?php echo $statusoutput ?></span></a>
 <?php } else { ?>
-    <a href="javascript:void(0)" onclick="changeStatus('<?php echo $loaddder ?>','<?php echo $tablename ?>','<?php echo $inputstatusname ?>','<?php echo $statusid ?>','<?php echo $loadderstatus ?>','<?php echo $filestatus ?>')"><span class="fontContantTbSuccess"><?php echo $inputstatusname ?></span></a>
+    <a href="javascript:void(0)" onclick="changeStatus('<?php echo $loaddder ?>','<?php echo $tablename ?>','<?php echo $inputstatusname ?>','<?php echo $statusid ?>','<?php echo $loadderstatus ?>','<?php echo $filestatus ?>')"><span class="fontContantTbSuccess"><?php echo $statusoutput ?></span></a>
 <?php } ?>
 
 <img src="../img/loader/ajax-loaderstatus.gif" alt="waiting" style="display:none;" id="<?php echo $loaddder ?>" />

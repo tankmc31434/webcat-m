@@ -6,7 +6,8 @@ include("./config.php");
 
 if ($_REQUEST['execute'] == "insert") {
     $randomNumber = rand(1111, 9999);
-
+    $myid = $_REQUEST['myid'];
+  
     if (!is_dir($path_html)) {
         mkdir($path_html, 0777);
     }
@@ -28,17 +29,27 @@ if ($_REQUEST['execute'] == "insert") {
     $insert[$table . "_kind"] = "'" . $_REQUEST['kind'] . "'";
     $insert[$table . "_title"] = "'" . $_REQUEST['titles'] . "'";
 
-    
+
     $insert[$table . "_pic"] = "'" . $_REQUEST['filename'] . "'";
     $insert[$table . "_file"] = "'" . $filename . "'";
     $insert[$table . "_credate"] = "NOW()";
     $insert[$table . "_lastdate"] = "NOW()";
     $insert[$table . "_status"] = "'Enable'";
 
-    
-    
+
+
     $sql = "INSERT INTO " . $table . "(" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
     $Query = $db->Execute($sql);
+    $insertid = $db->Insert_ID();
+
+    $sqlalbum = "INSERT INTO album (album_filename, album_containid) SELECT temp_filename, temp_containid FROM temp WHERE temp_containid = '$myid'";
+    $QueryAlbum = $db->Execute($sqlalbum);
+
+    $sqlupdate = "UPDATE album SET album_containid = '$insertid' WHERE album_containid = '$myid'";
+    $Queryupdate = $db->Execute($sqlupdate); 
+
+    $sqltemp = "DELETE FORM temp WHEN temp_containid = ''$myid'";
+    $Querytemp = $db->Execute($sqltemp);
 
     logs_access('Insert race');
 }

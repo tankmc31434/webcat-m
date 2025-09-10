@@ -13,8 +13,10 @@ $filestatus=$_POST['Valuefilestatus'];
 
 if($statusname=="Enable"){
 $inputstatusname="Disable";
+$statusoutput = "ปิดใช้งาน";
 }else if($statusname=="Disable"){
 $inputstatusname="Enable";
+$statusoutput = "เปิดใช้งาน";
 }
 		
 
@@ -25,10 +27,10 @@ $inputstatusname="Enable";
 			
 	?>
 	<?php if($inputstatusname=="Enable"){ ?>
-    <a href="javascript:void(0)"  onclick="changeStatus('<?php echo $loaddder?>','<?php echo $tablename?>','<?php echo $inputstatusname?>','<?php echo $statusid?>','<?php echo $loadderstatus?>','<?php echo $filestatus?>')" ><span class="fontContantTbEnable"><?php echo $inputstatusname?></span></a>
+    <a href="javascript:void(0)"  onclick="changeStatus('<?php echo $loaddder?>','<?php echo $tablename?>','<?php echo $inputstatusname?>','<?php echo $statusid?>','<?php echo $loadderstatus?>','<?php echo $filestatus?>')" ><span class="fontContantTbEnable"><?php echo $statusoutput?></span></a>
 
                 <?php }else{ ?>
-    <a href="javascript:void(0)"  onclick="changeStatus('<?php echo $loaddder?>','<?php echo $tablename?>','<?php echo $inputstatusname?>','<?php echo $statusid?>','<?php echo $loadderstatus?>','<?php echo $filestatus?>')" ><span class="fontContantTbDisable"><?php echo $inputstatusname?></span></a>
+    <a href="javascript:void(0)"  onclick="changeStatus('<?php echo $loaddder?>','<?php echo $tablename?>','<?php echo $inputstatusname?>','<?php echo $statusid?>','<?php echo $loadderstatus?>','<?php echo $filestatus?>')" ><span class="fontContantTbDisable"><?php echo $statusoutput?></span></a>
                 
                 
                 <?php } ?>

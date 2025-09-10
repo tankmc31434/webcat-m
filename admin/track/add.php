@@ -5,6 +5,7 @@ include('./config.php');
 include('../lib/function.php');
 include('../lib/connect.php');
 include('../lib/session.php');
+$myid = rand();
 ?>
 
 
@@ -82,6 +83,34 @@ include('../lib/session.php');
             align-items: center;
             width: 30px;
             height: 30px;
+        }
+
+        #preview img {
+            width: 100px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .image-box {
+            display: inline-block;
+            position: relative;
+            margin: 5px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -162,7 +191,7 @@ include('../lib/session.php');
                                         <div class="col-sm-4">
                                             <button type="button" class="btn btn-secondary add-new float-right mx-2" onclick="btnBackPage('index.php')"><i class="material-icons inbtn">arrow_back</i></button>
                                             <button type="button" class="btn btn-success add-new float-right mx-2" onclick="executeSubmit()"><i class="material-icons inbtn">save</i></button>
-
+                                            <input type="text" name="myid" id="myid" value="<?php echo $myid; ?>" style="display: none;">
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +215,11 @@ include('../lib/session.php');
                                     <div class="row my-3">
                                         <div class="col-sm-6">
                                             <h4>เพศ :</h4>
-                                            <input type="text" name="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
+                                            <select type="text" name="sex" id="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
+                                                <option value="">เลือกเพศสัตว์เลี้ยง</option>
+                                                <option value="M">เพศผู้</option>
+                                                <option value="F">เพศเมีย</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <h4>สายพันธุ์ :</h4>
@@ -204,6 +237,23 @@ include('../lib/session.php');
                                                 <input type="hidden" name="filename" id="filename" value="" />
                                                 <img src="../assets/images/nopic.png" style="max-height: 350px;max-width: 450px" class="imgadd rounded mx-auto d-block" alt="...">
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อัลบั้ม :</h4>
+                                            <div>
+                                                <input type="file" id="images" multiple accept="image/*">
+                                                <input type="button" value="Upload" onclick="uploadAlbum();">
+                                                <div id="status"></div>
+                                                <div id="preview"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อีเมลติดต่อ<span class="fontContantAlert"></span> :</h4>
+                                            <input type="text" name="email" id="email" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
                                         </div>
                                     </div>
                                     <div class="row my-3">
@@ -282,6 +332,8 @@ include('../lib/session.php');
     <script src="../dist/js/custom.min.js"></script>
 
     <script>
+        myid = document.getElementById("myid").value;
+
         CKEDITOR.replace('des', {
             extraPlugins: 'filebrowser',
             filebrowserUploadMethod: 'form',
@@ -414,6 +466,59 @@ include('../lib/session.php');
                     console.log(html);
                 }
             });
+        }
+
+        function uploadAlbum() {
+            let files = document.getElementById("images").files;
+            if (files.length === 0) {
+                alert("Please select at least one image!");
+                return;
+            }
+            if (files.length > 5) {
+                alert("You can upload maximum 5 images only!");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("myid", myid);
+            for (let i = 0; i < files.length; i++) {
+                formData.append("images[]", files[i]);
+            }
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "uploadAlbum.php", true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("preview").innerHTML += this.responseText;
+                } else {
+                    document.getElementById("status").innerHTML = "Upload failed!";
+                }
+            };
+
+            xhr.send(formData);
+        };
+
+        // ฟังก์ชันลบรูป
+        function deleteImage(id, filename) {
+            if (!confirm("Delete this image?")) return;
+            let formData = new FormData();
+            formData.append("id", id);
+            formData.append("filename", filename);
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "deleteAlbum.php", true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("img-box-" + id).remove();
+                } else {
+                    alert("Delete failed!");
+                }
+            };
+
+            xhr.send(formData);
         }
     </script>
 </body>

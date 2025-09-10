@@ -59,3 +59,44 @@ else
 $url .= $_SERVER['HTTP_HOST'];   
 $url .= $_SERVER['REQUEST_URI'];
 
+function adminNumRowsDB($valCoreDB = null, $valQueryDB = null)
+{
+################## Set Up Function ###############################
+    return $valQueryDB->_numOfRows;
+}
+
+################## Work Chair Fetch Array DB ##########################
+
+function adminFetchArrayDB($valCoreDB, $valQueryDB)
+{
+//################## Set Up Function ###############################
+    return $valQueryDB->FetchRow();
+}
+
+function adminInsertID($valCoreDB= null, $valTable = null, $valTableF = null)
+{
+    global $dbConnect;
+################## Set Up Function ###############################
+    if ($valCoreDB == "mssql") {
+        $valNowDB = adminMssqlInsertID($valTable, $valTableF);
+    } else {
+
+        // $valNowDB = mysqli_insert_id();
+        $valNowDB = "";
+
+        if (empty($valNowDB)) {
+            $valNowDB = $dbConnect->insert_Id();
+        }
+
+    }
+    return $valNowDB;
+}
+
+function adminMssqlInsertID($valTable, $valTableF)
+{
+###################### Set Up Function ######################
+    $sql = "SELECT MAX(" . $valTableF . ") FROM " . $valTable;
+    $Query = QueryDB(null, $sql);
+    list($fileId) = adminFetchArrayDB(null,$Query);
+    return $fileId;
+}

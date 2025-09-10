@@ -13,8 +13,10 @@ $filestatus = $_POST['Valuefilestatus'];
 
 if ($statusname == "Enable") {
     $inputstatusname = "Disable";
+    $statusoutput = "ปิดใช้งาน";
 } else if ($statusname == "Disable") {
     $inputstatusname = "Enable";
+    $statusoutput = "เปิดใช้งาน";
 }
 
 

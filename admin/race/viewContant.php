@@ -112,6 +112,31 @@ $valHtml = $path_html . "/" .$row[5];
             width: 30px;
             height: 30px;
         }
+        #preview img {
+      width: 250px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .image-box {
+      display: inline-block;
+      position: relative;
+      margin: 5px;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+    }
     </style>
 </head>
 
@@ -223,7 +248,38 @@ $valHtml = $path_html . "/" .$row[5];
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อัลบั้ม :</h4>
+                                            <div>
+                                                <div id="preview">
+                                                    <?php
+                                                    // โหลดรูปจาก DB มาแสดงตอนเปิดหน้า
+                                                    $sqlalbum = "SELECT * FROM album WHERE album_containid = ".$valID." ORDER BY album_id DESC";
+                                                    
+                                                    $result = QueryDB($coreLanguageSQL, $sqlalbum);
+                                                    $count_record = NumRowsDB($coreLanguageSQL, $result);
+                                                    $index = 1;
+                                                    if ($count_record > 0) {
+                                                        
+                                                        while ($index < $count_record + 1) {
+                                                            $rowalbum = FetchArrayDB($coreLanguageSQL, $result);
+                                                            $id = $rowalbum['album_id'];
+                                                            $filename = $rowalbum['album_filename'];
+                                                            $path = "../../upload/race/album/" . $filename;
+                                                            echo "<div class='image-box' id='img-box-$id'>
+                                                            <img src='$path' alt='$filename' style=\"max-height: 550px;max-width: 650px\">
+                                                            </div>";
+                                                            $index++;
+                                                        }
+                                                    } else {
+                                                        echo "<p>No images yet.</p>";
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row my-3">
                                         <div class="col">
                                             <h4>รายละเอียด : </h4>

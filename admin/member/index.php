@@ -209,7 +209,7 @@ include('../lib/session.php');
                                             <h2><? echo $title ?> <b><? echo $description ?></b></h2>
                                         </div>
                                         <div class="col-sm-4">
-                                            <button type="button" class="btn btn-info add-new float-right" onclick="location.href='add.php'"><i class="fa fa-plus"></i> Add New</button>
+                                            <button type="button" class="btn btn-info add-new float-right" onclick="location.href='add.php'"><i class="fa fa-plus"></i> เพิ่มข้อมูล</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -312,10 +312,10 @@ include('../lib/session.php');
                                                                 <div id="load_status<?php echo  $valID ?>">
                                                                     <?php if ($valStatus == "Enable") { ?>
 
-                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"><span class="<?php echo  $valStatusClass ?>"><?php echo  $valStatus ?></span></a>
+                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"><span class="<?php echo  $valStatusClass ?>">เปิดใช้งาน</span></a>
                                                                     <?php } else { ?>
 
-                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"> <span class="<?php echo  $valStatusClass ?>"><?php echo  $valStatus ?></span> </a>
+                                                                        <a href="javascript:void(0)" onclick="changeStatus('load_waiting<?php echo  $valID ?>', '<?php echo  $table ?>', '<?php echo  $valStatus ?>', '<?php echo  $valID ?>', 'load_status<?php echo  $valID ?>', '../<?php echo  $namefolder ?>/statusMg.php')"> <span class="<?php echo  $valStatusClass ?>">ปิดใช้งาน</span> </a>
 
                                                                     <?php } ?>
 
@@ -357,9 +357,9 @@ include('../lib/session.php');
                                                 <?php if ($module_pageshow > 1) {
                                                     $valPrePage = $module_pageshow - 1;
                                                 ?>
-                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valPrePage ?>'; document.myForm.submit();">Previous</button></li>
+                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valPrePage ?>'; document.myForm.submit();">ก่อนหน้า</button></li>
                                                 <?php } else { ?>
-                                                    <li class="page-item"><button class="page-link dis-mod" disabled>Previous</button></li>
+                                                    <li class="page-item"><button class="page-link dis-mod" disabled>ก่อนหน้า</button></li>
                                                 <?php } ?>
                                                 <?php
                                                 $limitpage = $module_pageshow + 3;
@@ -373,9 +373,9 @@ include('../lib/session.php');
                                                 <?php if ($module_pageshow < $numberofpage) {
                                                     $valNextPage = $module_pageshow + 1;
                                                 ?>
-                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valNextPage ?>'; document.myForm.submit();">Next</button></li>
+                                                    <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valNextPage ?>'; document.myForm.submit();">ถัดไป</button></li>
                                                 <?php } else { ?>
-                                                    <li class="page-item"><button class="page-link dis-mod" disabled>Next</button></li>
+                                                    <li class="page-item"><button class="page-link dis-mod" disabled>ถัดไป</button></li>
                                                 <?php } ?>
                                             </ul>
                                         </nav>
