@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<?php include('lib/connect.php');
-include('lib/session.php'); ?>
+<?php include('lib/connect.php');include('lib/session.php'); ?>
 <html lang="en">
 <?php
 
@@ -29,12 +28,12 @@ if ($_REQUEST['search'] != "") {
 $pagination = [];
 $slect_data = array();
 $slect_data[$table . "_id as " . substr("_id", 1)] = "";
-$slect_data[$table . "_subject as " . substr("_subject", 1)] = "";
-$slect_data[$table . "_title as " . substr("_title", 1)] = "";
-$slect_data[$table . "_kind as " . substr("_kind", 1)] = "";
-$slect_data[$table . "_pic as " . substr("_pic", 1)] = "";
-$slect_data[$table . "_credate as " . substr("_credate", 1)] = "";
-$sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table;
+$slect_data[$table  . "_subject as " . substr("_subject", 1)] = "";
+$slect_data[$table  . "_title as " . substr("_title", 1)] = "";
+$slect_data[$table  . "_kind as " . substr("_kind", 1)] = "";
+$slect_data[$table  . "_pic as " . substr("_pic", 1)] = "";
+$slect_data[$table  . "_credate as " . substr("_credate", 1)] = "";
+$sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table ;
 $sql .= " WHERE race_status = 'Enable' AND race_kind = 'สุนัข'";
 
 if ($search <> "") {
@@ -99,14 +98,12 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
 
     <div class="global-container">
         <?php include('inc/header.php'); ?>
-        <!-- แสดงรายการสายพันธุ์สุนัขทั้งหมดในระบบ พร้อมฟังก์ชันค้นหาและแบ่งหน้า ผู้ใช้สามารถดูรายละเอียดสายพันธุ์แต่ละตัวได้ -->
 
+<!-- แสดงรายการสายพันธุ์แมวทั้งหมดในระบบ พร้อมฟังก์ชันค้นหาและแบ่งหน้า ผู้ใช้สามารถดูรายละเอียดสายพันธุ์แต่ละตัวได้ -->
         <section class="layout-container ">
             <form action="?" method="post" name="myForm" id="myForm">
-                <input name="module_pageshow" type="hidden" id="module_pageshow"
-                    value="<?php echo $module_pageshow ?>" />
-                <input name="module_pagesize" type="hidden" id="module_pagesize"
-                    value="<?php echo $module_pagesize ?>" />
+                <input name="module_pageshow" type="hidden" id="module_pageshow" value="<?php echo  $module_pageshow ?>" />
+                <input name="module_pagesize" type="hidden" id="module_pagesize" value="<?php echo  $module_pagesize ?>" />
 
                 <div class="default-header">
                     <div class="wrapper">
@@ -137,37 +134,32 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                         <div class="container-xl">
                             <div class="row" style="margin-bottom: 1.5rem;">
                                 <!-- column -->
+                                <div class="col-7"></div>
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="search" name="search"
-                                            placeholder="ค้นหา" value="<?php echo trim($_REQUEST['search']) ?>">
+                                        <input type="text" class="form-control" id="search" name="search" placeholder="ค้นหา" value="<?php echo  trim($_REQUEST['search']) ?>">
                                     </div>
                                 </div>
 
                                 <div class="col-1">
-                                    <button type="button" onClick="document.myForm.submit();" class="btn shadow-lg"
-                                        style="background-color: #ffff;height:38px;min-width:auto;line-height:0;border-radius:5px">
+                                    <button type="button" onClick="document.myForm.submit();" class="btn shadow-lg" style="background-color: #ffff;height:38px;min-width:auto;line-height:0;border-radius:5px">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
                             </div>
 
                             <?php if ($count_totalrecord > 0) { ?>
-                                <div class="row">
-                                    <div class="row col-12">
+                                <div class="container">
+                                    <div class="row my-2">
                                         <? foreach ($query as $Key) { ?>
                                             <div class="col-xl-12">
                                                 <div class="card mb-3 card-body">
                                                     <div class="row align-items-center">
                                                         <div class="col-auto">
                                                             <?php if (is_file('upload/race/' . $Key[4])) { ?>
-                                                                <img style="height:300px;width:320px"
-                                                                    src="<?php echo $core_template; ?>upload/race/<?php echo $Key[4] ?>"
-                                                                    class="width-90 rounded-3" alt="">
+                                                                <img style="height:300px;width:320px" src="<?php echo $core_template; ?>upload/race/<?php echo $Key[4] ?>" class="width-90 rounded-3" alt="">
                                                             <?php } else { ?>
-                                                                <img style="height:300px;width:320px"
-                                                                    src="<?php echo $core_template; ?>assets/img/static/nopic.png"
-                                                                    class="width-90 rounded-3" alt="">
+                                                                <img style="height:300px;width:320px" src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="width-90 rounded-3" alt="">
                                                             <?php } ?>
 
 
@@ -181,12 +173,9 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                                                                 <h6 class="mb-1">
                                                                     <? echo $Key[2] ?>
                                                                 </h6>
-                                                                <button type="button"
-                                                                    onclick="location.href='race-dog-detail.php?id=<?php echo $Key[0] ?>'"
-                                                                    class="btn"
-                                                                    style="position: absolute;right:    10px;bottom:   10px;">
-                                                                    อ่านต่อ..
-                                                                </button>
+                                                                <button type="button" onclick="location.href='race-cat-detail.php?id=<?php echo $Key[0] ?>'" class="btn" style="position: absolute;right:    10px;bottom:   10px;">
+                                                                อ่านต่อ..
+                                                            </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -203,79 +192,64 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
 
                         </div>
 
-                        <?php
-                        $counter = 0;
-                        foreach ($data as $item) {
-                            if ($counter % 3 == 0) {
-                                echo '<div class="row mb-4">';
-                            }
-                            ?>
-                            <div class="col-4"></div>
-                            <div class="col-4 text-center">
-                                <nav aria-label="Page navigation" class="text-center"
-                                    style="width: 35%;position: absolute;left: 0px;height: 40px;width: 100%;display: flex;justify-content: center">
-                                    <ul class="pagination">
+                        <?php if ($count_totalrecord > 0) { ?>
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-4 text-center">
+                                    <nav aria-label="Page navigation" class="text-center" style="width: 35%;position: absolute;left: 0px;height: 40px;width: 100%;display: flex;justify-content: center">
+                                        <ul class="pagination">
 
-                                        <?php if ($module_pageshow > 1) {
-                                            $valPrePage = $module_pageshow - 1;
+                                            <?php if ($module_pageshow > 1) {
+                                                $valPrePage = $module_pageshow - 1;
                                             ?>
-                                            <li class="page-item"><button class="page-link"
-                                                    onclick="document.myForm.module_pageshow.value='<?php echo $valPrePage ?>'; document.myForm.submit();">
-                                                    < </button>
-                                            </li>
-                                        <?php } else { ?>
-                                            <li class="page-item"><button class="page-link dis-mod" disabled>
-                                                    < </button>
-                                            </li>
-                                        <?php } ?>
-                                        <?php
-                                        $limitpage = $module_pageshow + 3;
-                                        $limitpage2 = $numberofpage - 3;
-                                        if ($module_pageshow < $numberofpage) {
-                                            for ($i = $module_pageshow; $i <= $numberofpage; $i++) {
-                                                if ($i < $limitpage) {
+                                                <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valPrePage ?>'; document.myForm.submit();">
+                                                        < </button>
+                                                </li>
+                                            <?php } else { ?>
+                                                <li class="page-item"><button class="page-link dis-mod" disabled>
+                                                        < </button>
+                                                </li>
+                                            <?php } ?>
+                                            <?php
+                                            $limitpage = $module_pageshow + 3;
+                                            $limitpage2 = $numberofpage - 3;
+                                            if ($module_pageshow < $numberofpage) {
+                                                for ($i = $module_pageshow; $i <= $numberofpage; $i++) {
+                                                    if ($i < $limitpage) {
+                                            ?>
+                                                        <li class="page-item <?php if ($i == $module_pageshow) { ?>active<?php } ?>"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $i ?>'; document.myForm.submit();"><? echo $i ?></button></li>
+                                                    <?php }
+                                                }
+                                            } else if ($module_pageshow == $numberofpage) {
+                                                for ($i = 1; $i <= $module_pageshow; $i++) {
                                                     ?>
-                                                    <li class="page-item <?php if ($i == $module_pageshow) { ?>active<?php } ?>"><button
-                                                            class="page-link"
-                                                            onclick="document.myForm.module_pageshow.value='<?php echo $i ?>'; document.myForm.submit();"><? echo $i ?></button>
-                                                    </li>
-                                                <?php }
-                                            }
-                                        } else if ($module_pageshow == $numberofpage) {
-                                            for ($i = 1; $i <= $module_pageshow; $i++) {
-                                                ?>
-                                                    <li class="page-item <?php if ($i == $module_pageshow) { ?>active<?php } ?>"><button
-                                                            class="page-link"
-                                                            onclick="document.myForm.module_pageshow.value='<?php echo $i ?>'; document.myForm.submit();"><? echo $i ?></button>
-                                                    </li>
+                                                    <li class="page-item <?php if ($i == $module_pageshow) { ?>active<?php } ?>"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $i ?>'; document.myForm.submit();"><? echo $i ?></button></li>
                                             <? }
-                                        } ?>
+                                            } ?>
 
-                                        <?php if ($module_pageshow < $numberofpage) {
-                                            $valNextPage = $module_pageshow + 1;
+                                            <?php if ($module_pageshow < $numberofpage) {
+                                                $valNextPage = $module_pageshow + 1;
                                             ?>
-                                            <li class="page-item"><button class="page-link"
-                                                    onclick="document.myForm.module_pageshow.value='<?php echo $valNextPage ?>'; document.myForm.submit();">></button>
-                                            </li>
-                                        <?php } else { ?>
-                                            <li class="page-item"><button class="page-link dis-mod" disabled>></button></li>
-                                        <?php } ?>
-                                    </ul>
-                                </nav>
+                                                <li class="page-item"><button class="page-link" onclick="document.myForm.module_pageshow.value='<?php echo  $valNextPage ?>'; document.myForm.submit();">></button></li>
+                                            <?php } else { ?>
+                                                <li class="page-item"><button class="page-link dis-mod" disabled>></button></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-4"></div>
                             </div>
-                            <div class="col-4"></div>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
+
                 </div>
+            </form>
+        </section>
 
+
+        <?php include('inc/footer.php'); ?>
     </div>
-    </form>
-    </section>
-
-
-    <?php include('inc/footer.php'); ?>
-    </div>
-    <?php $db->close(); ?>
+<?php $db->close(); ?>
 </body>
 
 </html>

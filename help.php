@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<?php include('lib/connect.php'); 
-include('lib/session.php');?>
+<?php include('lib/connect.php');
+include('lib/session.php'); ?>
 <html lang="en">
 <?php
 
@@ -32,6 +32,7 @@ $slect_data[$table  . "_spot as " . substr("_spot", 1)] = "";
 $slect_data[$table  . "_pic as " . substr("_pic", 1)] = "";
 $slect_data[$table  . "_status as " . substr("_status", 1)] = "";
 $slect_data[$table  . "_credate as " . substr("_credate", 1)] = "";
+$slect_data[$table  . "_lastdate as " . substr("_lastdate", 1)] = "";
 $sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table . " WHERE " . $table . "_status = 'Approve' ";
 
 if ($search <> "") {
@@ -99,13 +100,25 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
         .img-hover-zoom:hover img {
             transform: scale(1.2);
         }
+
+        .card-block .wrapper .link .title-bottom::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            transition: opacity 0.2s linear;
+            opacity: 0;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="global-container">
-        <?php include('inc/header.php');?>
+        <?php include('inc/header.php'); ?>
 
 
         <section class="layout-container ">
@@ -136,13 +149,13 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                                 <!-- column -->
                                 <div class="col"></div>
                                 <? if ($_SESSION['core_session_flogout'] >= 1) { ?>
-                                <div class="col-2 ">
-                                    <button type="button" onClick="location.href='help-form.php'" class="btn shadow-lg float-end" style="background-color: #ffff;height:38px;min-width:auto;line-height:0;border-radius:5px">
-                                        <i class="fa fa-plus-square" style="color: green;"></i>
-                                        <span style="font-size: 1rem;">เพิ่มข้อมูล</span>
-                                    </button>
-                                </div>
-                                <?}?>
+                                    <div class="col-2 ">
+                                        <button type="button" onClick="location.href='help-form.php'" class="btn shadow-lg float-end" style="background-color: #ffff;height:38px;min-width:auto;line-height:0;border-radius:5px">
+                                            <i class="fa fa-plus-square" style="color: green;"></i>
+                                            <span style="font-size: 1rem;">เพิ่มข้อมูล</span>
+                                        </button>
+                                    </div>
+                                <? } ?>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="search" name="search" placeholder="ค้นหา" value="<?php echo  trim($_REQUEST['search']) ?>">
@@ -155,39 +168,54 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                                     </button>
                                 </div>
                             </div>
-                            <?php if ($count_totalrecord > 0) { ?>
-                                <ul class="item-list">
-                                    <? foreach ($query as $Key) { ?>
-                                        <li style="width: 33%;">
-                                            <a href="help-detail.php?id=<?php echo $Key[0] ?>" class="link">
-                                                <div class="card" style="background-color: white;">
-                                                    <div class="thumbnail">
-                                                        <figure class="cover">
-                                                            <?php if (is_file('upload/track/' . $Key[3])) { ?>
-                                                                <img class="img-cover" src="<?php echo $core_template; ?>upload/track/<?php echo $Key[3] ?>" real="" alt="">
-                                                            <?php } else { ?>
-                                                                <img class="img-cover" src="<?php echo $core_template; ?>assets/img/static/nopic.png" real="" alt="">
-                                                            <?php } ?>
-                                                        </figure>
-                                                    </div>
-                                                    <div class="card-body px-0 px-3">
-                                                        <p class="title typo-md text-primary fw-bold"><?php echo $Key[1] ?></p>
-                                                        <p class="desc typo-default"><?php echo $Key[2] ?></p>
-                                                        <div class="row align-items-center gutters-10">
-                                                            <div class="col">
-                                                                <p class="date typo-default text-secondary mt-3"><?php echo dateFormatReal($Key[5]) ?></p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <span class="material-symbols-rounded mt-3">chevron_right</span>
-                                                            </div>
-                                                        </div>
 
+
+
+
+
+
+
+
+
+
+                            <?php if ($count_totalrecord > 0) { ?>
+                                <div class="information-system" style="margin-bottom: 1rem;">
+                                    <div class="container-xl">
+                                        <div class="card-block">
+                                            <div class="row g-lg-4 g-3">
+                                                <? foreach ($query as $Key) { ?>
+                                                    <div class="col-xxl-4 col-sm-6">
+                                                        <div class="wrapper" style="border-radius:40px">
+                                                            <a href="help-detail.php?id=<?php echo $Key[0] ?>" class="link">
+                                                                <div class="thumbnail">
+                                                                    <figure class="cover">
+                                                                        <?php if (is_file('upload/track/' . $Key[3])) { ?>
+                                                                            <img src="<?php echo $core_template; ?>upload/track/<?php echo $Key[3] ?>" class="img-cover lazy loaded" alt="">
+                                                                        <?php } else { ?>
+                                                                            <img src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="img-cover lazy loaded" alt="">
+                                                                        <?php } ?>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="title-bottom" style="background: black;">
+                                                                    <div class="row align-items-center gutters-10">
+                                                                        <div class="col">
+                                                                            <div class="card-txt text-limit -x2" style="white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;"><? echo $Key[1] ?></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="desc typo-default fw-normal">
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
+                                                <? } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <? } else { ?>
                                 <p class="text-center">ไม่มีข้อมูล</p>
                             <? } ?>
@@ -251,18 +279,23 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                         </div>
 
                         <div class="container">
+
+                            <!-- ---     --------------------------------------------      -- -->
                             <div class="row my-2">
                                 <? foreach ($query2 as $Key2) { ?>
+
                                     <div class="col-xl-4">
                                         <div class="card mb-3 card-body">
+
                                             <div class="row align-items-center">
                                                 <div class="col-auto">
-                                                    <?php if (is_file('upload/track/' . $Key2[2])) { ?>
-                                                        <img style="height:100px" src="<?php echo $core_template; ?>upload/track/<?php echo $Key2[2] ?>" class="width-90 rounded-3" alt="">
-                                                    <?php } else { ?>
-                                                        <img style="height:100px" src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="width-90 rounded-3" alt="">
-                                                    <?php } ?>
-
+                                                    <a href="help-detail.php?id=<?php echo $Key2[0] ?>" class="link">
+                                                        <?php if (is_file('upload/track/' . $Key2[2])) { ?>
+                                                            <img style="height:100px" src="<?php echo $core_template; ?>upload/track/<?php echo $Key2[2] ?>" class="width-90 rounded-3" alt="">
+                                                        <?php } else { ?>
+                                                            <img style="height:100px" src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="width-90 rounded-3" alt="">
+                                                        <?php } ?>
+                                                    </a>
 
                                                 </div>
                                                 <div class="col">
@@ -270,17 +303,18 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                                                         <h6 class="mb-1">
                                                             <b>ชื่อ : <? echo $Key2[1] ?></b>
                                                         </h6>
-                                                        <h6 class="mb-1" >
+                                                        <h6 class="mb-1">
                                                             บริเวณหาย : <? echo $Key2[4] ?>
                                                         </h6>
                                                         <h6 class="mb-1">
-                                                        วันที่เจอ : <? echo dateFormatReal($Key2[3]); ?>
+                                                            วันที่เจอ : <? echo dateFormatReal($Key2[3]); ?>
                                                         </h6>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 <? } ?>
 
                             </div>

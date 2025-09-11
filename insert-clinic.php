@@ -18,7 +18,7 @@ if ($_REQUEST['execute'] == "insert") {
 	$insert[$table . "_pic"] = "'" . ($_REQUEST['filename']) . "'";
 	$insert[$table . "_credate"] = "NOW()";
 	$insert[$table . "_lastdate"] = "NOW()";
-	$insert[$table . "_status"] = "'Disable'";
+	$insert[$table . "_status"] = "'Process'";
 	$insert[$table."_creby"] = "".$_SESSION["core_session_fid"]."";
 	
 	$sql = "INSERT INTO " . $table . "(" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";

@@ -28,18 +28,28 @@ if ($_REQUEST['execute'] == "insert") {
     $insert[$table . "_gene"] = "'" . $_REQUEST['gene'] . "'";
     $insert[$table . "_area"] = "'" . $_REQUEST['area'] . "'";
     $insert[$table . "_spot"] = "'" . $_REQUEST['spot'] . "'";
-    
+
     $insert[$table . "_pic"] = "'" . $_REQUEST['filename'] . "'";
     $insert[$table . "_file"] = "'" . $filename . "'";
     $insert[$table . "_credate"] = "NOW()";
     $insert[$table . "_lastdate"] = "NOW()";
-    $insert[$table . "_status"] = "'Denine'";
+    $insert[$table . "_status"] = "'Approve'";
     $insert[$table . "_creby"] = "" . $_SESSION["core_session_fid"] . "";
 
-    
-    
+
+
     $sql = "INSERT INTO " . $table . "(" . implode(",", array_keys($insert)) . ") VALUES (" . implode(",", array_values($insert)) . ")";
     $Query = $db->execute($sql);
+    $insertid = $db->Insert_ID();
+    $sqlalbum = "INSERT INTO albumtrack (albumtrack_filename, albumtrack_containid) SELECT temptrack_filename, temptrack_containid FROM temptrack WHERE temptrack_containid = '$myid'";
+
+    $QueryAlbum = $db->Execute($sqlalbum);
+
+    $sqlupdate = "UPDATE albumtrack SET albumtrack_containid = '$insertid' WHERE albumtrack_containid = '$myid'";
+    $Queryupdate = $db->Execute($sqlupdate);
+
+    $sqltemp = "DELETE FORM temptrack WHEN temptrack_containid = ''$myid'";
+    $Querytemp = $db->Execute($sqltemp);
 
     logs_access('Insert Tracking');
 }

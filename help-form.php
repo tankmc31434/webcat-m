@@ -2,7 +2,7 @@
 <?php include('lib/connect.php');include('lib/session.php'); ?>
 <html lang="en">
 <?php
-
+$myid = rand();
 ?>
 
 <head>
@@ -53,6 +53,7 @@
             <input name="inputHtml" type="hidden" id="inputHtml" value="" />
                 <input name="namefolder" type="hidden" id="namefolder" value="clinic" />
                 <input name="execute" type="hidden" id="execute" value="insert" />
+                 <input type="text" name="myid" id="myid" value="<?php echo $myid; ?>" style="display: none;">
                 <div class="default-page news-page">
                     <div class="news-list" style="padding-top: 16rem;">
                         <div class="container-xl">
@@ -89,7 +90,11 @@
                                     <div class="row my-3">
                                         <div class="col-sm-6">
                                             <h4>เพศ :</h4>
-                                            <input type="text" name="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border">
+                                            <select type="text" name="sex" id="sex" style="width: 100%;height:36px;background-color:#ededed" class="form-control border border-4 rounded">
+                                                <option value="">เลือกเพศสัตว์เลี้ยง</option>
+                                                <option value="M">เพศผู้</option>
+                                                <option value="F">เพศเมีย</option>
+                                            </select>
                                         </div>
                                         <div class="col-sm-6">
                                             <h4>สายพันธุ์ :</h4>
@@ -129,6 +134,17 @@
                                             </div>
                                         </div>
                                         <div class="row my-3">
+                                        <div class="col">
+                                            <h4>อัลบั้ม :</h4>
+                                            <div>
+                                                <input type="file" id="images" multiple accept="image/*">
+                                                <input type="button" value="Upload" onclick="uploadAlbum();">
+                                                <div id="status"></div>
+                                                <div id="preview"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="row my-3">
                                             <div class="col form-group text-center">
                                                 <button type="button" onclick="executeSubmit()" style="background-color: #867070;border-radius:5px;color:white; " class="btn btn-lg btn-block my-4">ส่งข้อมูล</button>
                                             </div>
@@ -149,6 +165,8 @@
 
     </div>
     <script>
+        myid = document.getElementById("myid").value;
+
         CKEDITOR.replace('des', {
             extraPlugins: 'filebrowser',
             filebrowserUploadMethod: 'form',
@@ -283,6 +301,59 @@
                     jQuery("#loadCheckComplete").html(html);
                 }
             });
+        }
+
+         function uploadAlbum() {
+            let files = document.getElementById("images").files;
+            if (files.length === 0) {
+                alert("Please select at least one image!");
+                return;
+            }
+            if (files.length > 5) {
+                alert("You can upload maximum 5 images only!");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("myid", myid);
+            for (let i = 0; i < files.length; i++) {
+                formData.append("images[]", files[i]);
+            }
+
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "uploadAlbum.php", true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("preview").innerHTML += this.responseText;
+                } else {
+                    document.getElementById("status").innerHTML = "Upload failed!";
+                }
+            };
+
+            xhr.send(formData);
+        };
+
+        // ฟังก์ชันลบรูป
+        function deleteImage(id, filename) {
+            if (!confirm("Delete this image?")) return;
+            let formData = new FormData();
+            formData.append("id", id);
+            formData.append("filename", filename);
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "deleteAlbum.php", true);
+
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    document.getElementById("img-box-" + id).remove();
+                } else {
+                    alert("Delete failed!");
+                }
+            };
+
+            xhr.send(formData);
         }
     </script>
 </body>

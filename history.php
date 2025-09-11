@@ -163,16 +163,19 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                                         <? foreach ($query as $Key) {
                                             if ($Key[4] == "Approve") {
                                                 $valStatusClass = "fontContantTbEnable";
+                                                $valStatusName = "อนุมัติ";
                                             } else if ($Key[4] == "Denine") {
                                                 $valStatusClass = "fontContantTbDisable";
+                                                $valStatusName = "ไม่อนุมัติ";
                                             } else {
                                                 $valStatusClass = "fontContantTbSuccess";
+                                                $valStatusName = "สำเร็จ";
                                             }
                                         ?>
                                             <tr class="text-center">
                                                 <th scope="row"><? echo $i ?></th>
-                                                <td><? echo $Key[1] ?></td>
-                                                <td class="<? echo $valStatusClass ?>"><? echo $Key[4] ?></td>
+                                                <td><a href="help-detail.php?id=<?php echo $Key[0] ?>" class="link"><? echo $Key[1] ?></a></td>
+                                                <td class="<? echo $valStatusClass ?>"><? echo $valStatusName ?></td>
                                                 <td><? echo dateFormatReal($Key[5]) ?></td>
                                                 <? if ($Key[4] == "Success") { ?>
                                                     <td><span style="color: green;">เจอเจ้าของแล้ว</span></td>
