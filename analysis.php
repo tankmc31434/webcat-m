@@ -109,7 +109,7 @@ include('lib/connect.php'); ?>
                                     <i class="fa fa-paw" style="color: #867070;font-size:5rem;" aria-hidden="true"></i>
                                     <br>
                                     <br>
-                                    ถามคำถามกับ ai เพื่อวิเคราะห์โรคสัตว์เลี้ยงของคุณ
+                                    ใส่รายละเอียดอาการเพื่อให้ ai เพื่อวิเคราะห์โรคสัตว์เลี้ยงเบื้องต้น
                                 </div>
                             </div>
 
