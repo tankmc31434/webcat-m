@@ -169,15 +169,6 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                                 </div>
                             </div>
 
-
-
-
-
-
-
-
-
-
                             <?php if ($count_totalrecord > 0) { ?>
                                 <div class="information-system" style="margin-bottom: 1rem;">
                                     <div class="container-xl">
@@ -199,9 +190,7 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                                                                 <div class="title-bottom" style="background: black;">
                                                                     <div class="row align-items-center gutters-10">
                                                                         <div class="col">
-                                                                            <div class="card-txt text-limit -x2" style="white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;"><? echo $Key[1] ?></div>
+                                                                            <div class="card-txt text-limit -x2" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><? echo $Key[1] ?></div>
                                                                         </div>
 
                                                                     </div>

@@ -8,7 +8,7 @@ $table = "race";
 $module_pagesize = "";
 $module_pageshow = "";
 $module_orderby = "";
-$module_default_pagesize = 5;
+$module_default_pagesize = 6;
 $module_default_pageshow = 1;
 
 if ($module_pagesize == "") {
@@ -149,42 +149,41 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                             </div>
 
                             <?php if ($count_totalrecord > 0) { ?>
-                                <div class="container">
-                                    <div class="row my-2">
-                                        <? foreach ($query as $Key) { ?>
-                                            <div class="col-xl-12">
-                                                <div class="card mb-3 card-body">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-auto">
-                                                            <?php if (is_file('upload/race/' . $Key[4])) { ?>
-                                                                <img style="height:300px;width:320px" src="<?php echo $core_template; ?>upload/race/<?php echo $Key[4] ?>" class="width-90 rounded-3" alt="">
-                                                            <?php } else { ?>
-                                                                <img style="height:300px;width:320px" src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="width-90 rounded-3" alt="">
-                                                            <?php } ?>
+                                <div class="information-system" style="margin-bottom: 1rem;">
+                                    <div class="container-xl">
+                                        <div class="card-block">
+                                            <div class="row g-lg-4 g-3">
+                                                <? foreach ($query as $Key) { ?>
+                                                    <div class="col-xxl-4 col-sm-6">
+                                                        <div class="wrapper" style="border-radius:40px">
+                                                            <a href="race-dog-detail.php?id=<?php echo $Key[0] ?>" class="link">
+                                                                <div class="thumbnail">
+                                                                    <figure class="cover">
+                                                                        <?php if (is_file('upload/race/' . $Key[4])) { ?>
+                                                                            <img src="<?php echo $core_template; ?>upload/race/<?php echo $Key[4] ?>" class="img-cover lazy loaded" alt="">
+                                                                        <?php } else { ?>
+                                                                            <img src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="img-cover lazy loaded" alt="">
+                                                                        <?php } ?>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="title-bottom" style="background: black;">
+                                                                    <div class="row align-items-center gutters-10">
+                                                                        <div class="col">
+                                                                            <div class="card-txt text-limit -x2" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><? echo $Key[1] ?></div>
+                                                                        </div>
 
-
-                                                        </div>
-                                                        <div class="col" style="height:300px;width:320px">
-                                                            <div class="overflow-hidden flex-nowrap">
-                                                                <h3 class="mb-1">
-                                                                    <b><? echo $Key[1] ?></b>
-                                                                </h3>
-                                                                <br /><br />
-                                                                <h6 class="mb-1">
-                                                                    <? echo $Key[2] ?>
-                                                                </h6>
-                                                                <button type="button" onclick="location.href='race-cat-detail.php?id=<?php echo $Key[0] ?>'" class="btn" style="position: absolute;right:    10px;bottom:   10px;">
-                                                                อ่านต่อ..
-                                                            </button>
-                                                            </div>
+                                                                    </div>
+                                                                    <div class="desc typo-default fw-normal">
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </div>
                                                     </div>
-                                                </div>
+
+                                                <? } ?>
                                             </div>
-                                        <? } ?>
-
+                                        </div>
                                     </div>
-
                                 </div>
                             <? } else { ?>
                                 <p class="text-center">ไม่มีข้อมูล</p>
