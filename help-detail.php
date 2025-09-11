@@ -24,7 +24,6 @@ $query = $db->execute($sql);
 $val = $query->fields;
 
 $htmlpath = "upload/track/file/" . $val[6];
-$db->close();
 
 
 
@@ -211,7 +210,27 @@ if ($val[8] == 'M') {
                         </div>
                         <div class="gallery">
 
+                            <?php
+                            // โหลดรูปจาก DB มาแสดงตอนเปิดหน้า
+                            $sqlalbum = "SELECT * FROM albumtrack WHERE albumtrack_containid = " . $val[0] . " ORDER BY albumtrack_id DESC";
                             
+                            $result = $db->execute($sqlalbum);
+                            $count_record = $result->_numOfRows;
+                            $index = 1;
+                            if ($count_record > 0) {
+
+                                while ($index < $count_record + 1) {
+                                    $rowalbum = $result->FetchRow();
+                                    $id = $rowalbum['albumtrack_id'];
+                                    $filename = $rowalbum['albumtrack_filename'];
+                                    $path = "./upload/track/album/" . $filename;
+                                    echo "<img src='$path' alt='$filename' style=\"height: 150px;width: 250px\">";
+                                    $index++;
+                                }
+                            } else {
+                                echo "<p>No images yet.</p>";
+                            }
+                            ?>
 
                         </div>
                         <!-- Lightbox -->
