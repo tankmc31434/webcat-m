@@ -228,7 +228,7 @@ if ($val[8] == 'M') {
                                     $index++;
                                 }
                             } else {
-                                echo "<p>No images yet.</p>";
+                                
                             }
                             ?>
 

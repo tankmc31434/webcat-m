@@ -105,20 +105,22 @@ include('lib/connect.php'); ?>
                     <div class="container-xl">
 
                         <div class="row py-2">
-                                <div class="col text-center">
-                                    <i class="fa fa-paw" style="color: #867070;font-size:5rem;" aria-hidden="true"></i>
-                                    <br>
-                                    <br>
-                                    ถามคำถามกับ ai เพื่อวิเคราะห์โรคสัตว์เลี้ยงของคุณ
-                                </div>
+                            <div class="col text-center">
+                                <i class="fa fa-paw" style="color: #867070;font-size:5rem;" aria-hidden="true"></i>
+                                <br>
+                                <br>
+                                ถามคำถามกับ ai เพื่อวิเคราะห์โรคสัตว์เลี้ยงของคุณ
                             </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col text-center">
+                                <div id="messages"></div>
 
-                        <div id="messages"></div>
-
-                        <form id="chatForm">
-                            <input id="prompt" type="text" placeholder="Say something..." autocomplete="off" />
-                            <button type="submit">ส่ง</button>
-                        </form>
+                                <div id="chat"></div>
+                                <input type="text" id="input" placeholder="พิมพ์คำถาม..." onkeypress="if(event.key==='Enter') sendMessage()">
+                                <button onclick="sendMessage()">ส่ง</button>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -154,68 +156,27 @@ include('lib/connect.php'); ?>
             });
         }
 
-        const messagesEl = document.getElementById('messages');
-        const form = document.getElementById('chatForm');
-        const promptInput = document.getElementById('prompt');
+        async function sendMessage() {
+            let msg = document.getElementById("input").value;
+            if (!msg) return;
+            document.getElementById("chat").innerHTML += `<div class="user"><b>คุณ:</b> ${msg}</div>`;
 
-        // Keep conversation in an array so we can send full context
-        const conversation = [{
-            role: "system",
-            content: "You are a helpful assistant."
-        }];
-
-        function append(role, text) {
-            const div = document.createElement('div');
-            div.className = 'msg ' + (role === 'user' ? 'user' : 'assistant');
-            div.textContent = (role === 'user' ? 'You: ' : 'Bot: ') + text;
-            messagesEl.appendChild(div);
-            messagesEl.scrollTop = messagesEl.scrollHeight;
-        }
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const text = promptInput.value.trim();
-            if (!text) return;
-            append('user', text);
-            conversation.push({
-                role: 'user',
-                content: text
+            let res = await fetch("chat.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: msg
+                })
             });
-            promptInput.value = '';
-            append('assistant', '...thinking');
+            let data = await res.json();
+            console.log(data);
 
-            // send conversation to PHP
-            try {
-                const res = await fetch('chat.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        messages: conversation
-                    })
-                });
-                const data = await res.json();
-                // remove the temporary thinking message
-                messagesEl.lastElementChild.remove();
-
-                if (data.error) {
-                    append('assistant', 'Error: ' + data.error);
-                } else {
-                    const assistantText = data.reply;
-                    append('assistant', assistantText);
-                    // add assistant reply into conversation context
-                    conversation.push({
-                        role: 'assistant',
-                        content: assistantText
-                    });
-                }
-            } catch (err) {
-                // remove thinking and show error
-                messagesEl.lastElementChild.remove();
-                append('assistant', 'Request failed: ' + err.message);
-            }
-        });
+            document.getElementById("chat").innerHTML += `<div class="bot"><b>บอท:</b> ${data.reply}</div>`;
+            document.getElementById("input").value = "";
+            document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+        }
     </script>
 </body>
 
