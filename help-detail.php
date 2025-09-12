@@ -145,7 +145,7 @@ if ($val[8] == 'M') {
                                             </div>
                                             <div class="col-lg-auto col-md col-6 text-lg-start text-end ps-0">
                                                 <div class="back">
-                                                    <a href="help-formEmail.php?id=<?php echo $val[0] ?>" class="btn btn-outline-primary btn-lg rounded-pill fw-bold">แจ้งสูญหาย</a>
+                                                    <a href="help-formEmail.php?id=<?php echo $val[0] ?>&email=<?php echo $val[12] ?>" class="btn btn-outline-primary btn-lg rounded-pill fw-bold">แจ้งเบาะแส</a>
                                                 </div>
                                             </div>
                                             <div class="col-lg-auto col-md col-6 text-lg-start text-end ps-0">

@@ -35,7 +35,7 @@ $myid = rand();
             left: 96%;
             margin-left: -10px;
             margin-top: 2px;
-            cursor: pointer;
+            cursor: pointer; 
             color: white;
             background-color: red;
             border-radius: 50%;
@@ -50,11 +50,7 @@ $myid = rand();
 
         <!-- ให้ผู้ใช้กรอกข้อมูลเพื่อขอความช่วยเหลือสัตว์เลี้ยงหาย โดยมีฟอร์มกรอกข้อมูลและอัปโหลดรูปภาพ พร้อมส่งข้อมูลไปบันทึกผ่าน AJAX -->
         <section class="layout-container object-fit-cover" style="background-image: url('./assets/img/background/bgform.png');background-repeat: no-repeat;background-size: cover;">
-            <form action="?" method="post" name="myForm" id="myForm">
-                <input name="inputHtml" type="hidden" id="inputHtml" value="" />
-                <input name="namefolder" type="hidden" id="namefolder" value="clinic" />
-                <input name="execute" type="hidden" id="execute" value="insert" />
-                <input type="text" name="myid" id="myid" value="<?php echo $myid; ?>" style="display: none;">
+            <form action="sentEmail.php" method="post" enctype="multipart/form-data">
                 <div class="default-page news-page">
                     <div class="news-list" style="padding-top: 16rem;">
                         <div class="container-xl">
@@ -75,7 +71,7 @@ $myid = rand();
                                         <div class="row my-3">
                                             <div class="col">
                                                 <h4>email ผู้รับ<span class="fontContantAlert">*</span> :</h4>
-                                                <input disabled type="text" name="email" style="width: 100%;background-color:#ededed" class="form-control border"></input>
+                                                <input type="text" name="email" id="email" style="width: 100%;background-color:#ededed" class="form-control border" value="<?php echo $_REQUEST['email'] ?>"></input>
                                             </div>
                                         </div>
                                         <div class="row my-3">
@@ -87,19 +83,17 @@ $myid = rand();
                                         <div class="row my-3">
                                             <div class="col">
                                                 <h4>ข้อความ :</h4>
-                                                <textarea type="text" name="area" style="width: 100%;background-color:#ededed" class="form-control border"></textarea>
+                                                <textarea type="text" name="message" id="message" style="width: 100%;background-color:#ededed" class="form-control border"></textarea>
                                             </div>
                                         </div>
                                         <div class="row my-3">
                                             <div class="col form-group">
                                                 <h4>รูปภาพเบาะแส :</h4>
                                                 <div>
-                                                    <input type="file" name="file" id="file">
-                                                    <input type="button" id="btn_uploadfile" value="Upload" onclick="uploadFile();">
+                                                    <input type="file" name="attachment" accept="image/*" onchange="previewImage(event)">
                                                 </div>
-                                                <div class="image py-3" id="img">
-                                                    <input type="hidden" name="filename" id="filename" value="" />
-                                                    <img src="./assets/img/static/nopic.png" style="max-height: 350px;max-width: 450px" class="imgadd rounded mx-auto d-block" alt="...">
+                                                <div class="image py-3" >
+                                                    <img id="preview" src="./assets/img/static/nopic.png" style="max-height: 350px;max-width: 450px" class="imgadd rounded mx-auto d-block"  alt="...">
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +101,7 @@ $myid = rand();
 
                                         <div class="row my-3">
                                             <div class="col form-group text-center">
-                                                <button type="button" onclick="executeSubmit()" style="background-color: #867070;border-radius:5px;color:white; " class="btn btn-lg btn-block my-4">ส่งข้อมูล</button>
+                                                <button type="submit" style="background-color: #867070;border-radius:5px;color:white; " class="btn btn-lg btn-block my-4">ส่งข้อมูล</button>
                                             </div>
                                         </div>
                                     </div>
@@ -136,186 +130,22 @@ $myid = rand();
 
         });
 
-        // Upload file
-        function uploadFile() {
-            var foldername_up = 'track';
-            var files = document.getElementById("file").files;
-            var locationfile = "./upload/" + foldername_up + "/";
 
-            if (files.length > 0) {
-
-                var formData = new FormData();
-                formData.append("file", files[0]);
-                formData.append("namefolder", foldername_up);
-
-                var xhttp = new XMLHttpRequest();
-
-                // Set POST method and ajax file path
-                xhttp.open("POST", "uploadfilenew.php", true);
-
-                // call on request changes state
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-
-                        var response = this.responseText;
-                        if (response != 0) {
-                            htmlStr = '<input type="hidden" name="filename" id="filename" value="' + response + '"/><i class="material-icons btn-delete" onclick="deleteFile();">remove</i><img src="' + locationfile + response + '" style="max-height: 350px;max-width: 450px" id="img" class="imgadd rounded mx-auto d-block">';
-                            $('#img').html(htmlStr);
-                            $('#file').attr('disabled', 'disabled');
-                            $('#btn_uploadfile').attr('disabled', 'disabled');
-
-                        } else {
-                            alert("File not uploaded.");
-                        }
-                    }
-                };
-
-                // Send request with data
-                xhttp.send(formData);
-
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('preview');
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
             } else {
-                alert("Please select a file");
+                preview.src = "";
+                preview.style.display = 'none';
             }
-
         }
 
 
-        // delete file
-        function deleteFile() {
-            var files = document.getElementById("filename").value;
-            var foldername_up = 'track';
-            if (files.length > 0) {
-
-                var formData = new FormData();
-                formData.append("file", files);
-                formData.append("namefolder", foldername_up);
-
-                var xhttp = new XMLHttpRequest();
-
-                // Set POST method and ajax file path
-                xhttp.open("POST", "deletefilenew.php", true);
-
-                // call on request changes state
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-
-                        var response = this.responseText;
-                        if (response == 1) {
-                            htmlStr = ' <img src="./assets/img/static/nopic.png" style="max-height: 350px;max-width: 450px" class="imgadd rounded mx-auto d-block" alt="...">';
-                            $('#img').html(htmlStr);
-                            $('#file').removeAttr('disabled');
-                            $('#btn_uploadfile').removeAttr('disabled');
-
-                        } else {
-                            alert("File not delete.");
-                        }
-                    }
-                };
-
-                // Send request with data
-                xhttp.send(formData);
-
-            } else {
-                alert("Please select a file");
-            }
-
-        }
-
-        // onsubmit
-        function executeSubmit() {
-            with(document.myForm) {
-
-                if (document.myForm.subject.value == '') {
-                    document.myForm.subject.focus();
-                    jQuery("#subject").addClass("formInputContantTbAlertY");
-                    return false;
-                } else {
-                    jQuery("#subject").removeClass("formInputContantTbAlertY");
-                }
-                if (document.getElementById('kind').value == 0) {
-                    document.getElementById('kind').focus();
-                    jQuery("#kind").addClass("formInputContantTbAlertY");
-                    return false;
-                } else {
-                    jQuery("#kind").removeClass("formInputContantTbAlertY");
-                }
-
-                var alleditDetail = CKEDITOR.instances.des.getData();
-                jQuery('#inputHtml').val(alleditDetail);
-            }
-            insertNew('insert-help.php');
-
-        }
-
-        // insert 
-        function insertNew(fileAc) {
-
-            var TYPE = "POST";
-            var URL = fileAc;
-            var dataSet = jQuery("#myForm").serialize();
-
-            jQuery.ajax({
-                type: TYPE,
-                url: URL,
-                data: dataSet,
-                success: function(html) {
-                    jQuery("#loadCheckComplete").html(html);
-                }
-            });
-        }
-
-        function uploadAlbum() {
-            let files = document.getElementById("images").files;
-            if (files.length === 0) {
-                alert("Please select at least one image!");
-                return;
-            }
-            if (files.length > 5) {
-                alert("You can upload maximum 5 images only!");
-                return;
-            }
-
-            let formData = new FormData();
-            formData.append("myid", myid);
-            for (let i = 0; i < files.length; i++) {
-                formData.append("images[]", files[i]);
-            }
 
 
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "uploadAlbum.php", true);
-
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    document.getElementById("preview").innerHTML += this.responseText;
-                } else {
-                    document.getElementById("status").innerHTML = "Upload failed!";
-                }
-            };
-
-            xhr.send(formData);
-        };
-
-        // ฟังก์ชันลบรูป
-        function deleteImage(id, filename) {
-            if (!confirm("Delete this image?")) return;
-            let formData = new FormData();
-            formData.append("id", id);
-            formData.append("filename", filename);
-
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "deleteAlbum.php", true);
-
-            xhr.onload = function() {
-                if (this.status === 200) {
-                    document.getElementById("img-box-" + id).remove();
-                } else {
-                    alert("Delete failed!");
-                }
-            };
-
-            xhr.send(formData);
-        }
     </script>
 </body>
 

@@ -23,7 +23,6 @@ $sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table
 $sql .= " WHERE " . $table . "_id = '" . $_REQUEST['id'] . "'";
 $query = $db->execute($sql);
 $val = $query->fields;
-
 $db->close();
 
 ?>
