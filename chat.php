@@ -31,7 +31,7 @@ curl_close($ch);
 
 $data = json_decode($response, true);
 echo json_encode([
-    "reply" => $data["choices"][0]["message"]["content"] ?? $response
+    "reply" => $data["choices"][0]["message"]["content"] ?? "❌ เกิดข้อผิดพลาด"
 ]);
 
 ?>
