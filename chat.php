@@ -9,7 +9,7 @@ $message = $input["message"] ?? "";
 // 🔑 ใส่ API Key ของคุณตรงนี้
 // $apiKey = "YOUR_OPENAI_API_KEY";
 // ใส่ API Key ของคุณ
-$apiKey = "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";
+$apiKey = "";
 
 $ch = curl_init("https://api.openai.com/v1/chat/completions");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

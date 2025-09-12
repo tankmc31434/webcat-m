@@ -105,7 +105,7 @@ include('lib/connect.php'); ?>
                     <div class="container-xl">
 
                         <div class="row py-2">
-                            <div class="col text-center">
+                            <div class="col text-center fs-4">
                                 <i class="fa fa-paw" style="color: #867070;font-size:5rem;" aria-hidden="true"></i>
                                 <br>
                                 <br>
@@ -114,11 +114,11 @@ include('lib/connect.php'); ?>
                         </div>
                         <div class="row py-2">
                             <div class="col text-center">
-                                <div id="messages"></div>
+                                <div id="messages" class="mb-2 fs-4"></div>
 
-                                <div id="chat"></div>
-                                <input type="text" id="input" placeholder="พิมพ์คำถาม..." onkeypress="if(event.key==='Enter') sendMessage()">
-                                <button onclick="sendMessage()">ส่ง</button>
+                                <div id="chat" class="mb-3 fs-4"></div>
+                                <input class="fs-3" type="text" id="input" placeholder="พิมพ์คำถาม..." onkeypress="if(event.key==='Enter') sendMessage()">
+                                <button class="fs-4" onclick="sendMessage()">ส่ง</button>
                             </div>
                         </div>
 
@@ -159,7 +159,7 @@ include('lib/connect.php'); ?>
         async function sendMessage() {
             let msg = document.getElementById("input").value;
             if (!msg) return;
-            document.getElementById("chat").innerHTML += `<div class="user"><b>คุณ:</b> ${msg}</div>`;
+            document.getElementById("chat").innerHTML += `<div class="user mb-3 fs-4"><b>คุณ:</b> ${msg}</div>`;
 
             let res = await fetch("chat.php", {
                 method: "POST",
@@ -173,7 +173,7 @@ include('lib/connect.php'); ?>
             let data = await res.json();
             console.log(data);
 
-            document.getElementById("chat").innerHTML += `<div class="bot"><b>บอท:</b> ${data.reply}</div>`;
+            document.getElementById("chat").innerHTML += `<div class="bot mb-3 fs-4"><b>บอท:</b> ${data.reply}</div>`;
             document.getElementById("input").value = "";
             document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
         }
