@@ -125,19 +125,19 @@
                                         </div>
                                         <div class="row my-3">
                                             <div class="col form-group">
-                                                <h4>ลิงค์ช่องทางการติดต่อผ่าน Facebook :</h4>
+                                                <h4>ชื่อเพจเฟสบุ๊ค :</h4>
                                                 <textarea type="text" name="facebook" style="width: 100%;background-color:#ededed" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="row my-3">
                                             <div class="col form-group">
-                                                <h4>ลิงค์นำทางผ่าน Google Map :</h4>
+                                                <h4>อีเมลสถานที่รักษาสัตว์ :</h4>
                                                 <textarea type="text" name="map" style="width: 100%;background-color:#ededed" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="row my-3">
                                             <div class="col form-group text-center">
-                                                <button type="button" onclick="executeSubmit()" style="background-color: #867070;border-radius:5px;color:white; " class="btn btn-lg btn-block my-4">SEND</button>
+                                                <button type="button" onclick="executeSubmit()" style="background-color: #867070;border-radius:5px;color:white; " class="btn btn-lg btn-block my-4">ส่งข้อมูล</button>
                                             </div>
                                         </div>
                                     </div>

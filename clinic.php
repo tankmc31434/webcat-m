@@ -9,7 +9,7 @@ $table_pro = "province";
 $module_pagesize = "";
 $module_pageshow = "";
 $module_orderby = "";
-$module_default_pagesize = 5;
+$module_default_pagesize = 6;
 $module_default_pageshow = 1;
 
 if ($module_pagesize == "") {
@@ -179,7 +179,45 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                             </div>
 
                             <?php if ($count_totalrecord > 0) { ?>
-                                <div class="container">
+
+                                <div class="information-system" style="margin-bottom: 1rem;">
+                                    <div class="container-xl">
+                                        <div class="card-block">
+                                            <div class="row g-lg-4 g-3">
+                                                <? foreach ($query as $Key) { ?>
+                                                    <div class="col-xxl-4 col-sm-6">
+                                                        <div class="wrapper" style="border-radius:40px">
+                                                            <a href="clinic-detail.php?id=<?php echo $Key[0] ?>" class="link">
+                                                                <div class="thumbnail">
+                                                                    <figure class="cover">
+                                                                        <?php if (is_file('upload/clinic/' . $Key[8])) { ?>
+                                                                            <img src="<?php echo $core_template; ?>upload/clinic/<?php echo $Key[8] ?>" class="img-cover lazy loaded" alt="">
+                                                                        <?php } else { ?>
+                                                                            <img src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="img-cover lazy loaded" alt="">
+                                                                        <?php } ?>
+                                                                    </figure>
+                                                                </div>
+                                                                <div class="title-bottom" style="background: black;">
+                                                                    <div class="row align-items-center gutters-10">
+                                                                        <div class="col">
+                                                                            <div class="card-txt text-limit -x2" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><? echo $Key[1] ?></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="desc typo-default fw-normal">
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                <? } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="container">
                                     <div class="row my-2">
                                         <? foreach ($query as $Key) { ?>
                                             <div class="col-xl-12">
@@ -227,7 +265,7 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
 
                                     </div>
 
-                                </div>
+                                </div> -->
                             <? } else { ?>
                                 <p class="text-center">ไม่มีข้อมูล</p>
                             <? } ?>

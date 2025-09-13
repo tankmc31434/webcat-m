@@ -143,7 +143,11 @@ if ($val[8] == 'M') {
                                             <div class="col-md-auto pe-md-4">
                                                 <? echo dateFormatReal($val[5]) ?>
                                             </div>
-
+                                            <div class="col-lg-auto col-md col-6 text-lg-start text-end ps-0">
+                                                <div class="back">
+                                                    <a href="help-formEmail.php?id=<?php echo $val[0] ?>&email=<?php echo $val[12] ?>" class="btn btn-outline-primary btn-lg rounded-pill fw-bold">แจ้งเบาะแส</a>
+                                                </div>
+                                            </div>
                                             <div class="col-lg-auto col-md col-6 text-lg-start text-end ps-0">
                                                 <div class="back">
                                                     <a href="javascript: history.go(-1)" class="btn btn-outline-primary btn-lg rounded-pill fw-bold">กลับ</a>
@@ -213,7 +217,7 @@ if ($val[8] == 'M') {
                             <?php
                             // โหลดรูปจาก DB มาแสดงตอนเปิดหน้า
                             $sqlalbum = "SELECT * FROM albumtrack WHERE albumtrack_containid = " . $val[0] . " ORDER BY albumtrack_id DESC";
-                            
+
                             $result = $db->execute($sqlalbum);
                             $count_record = $result->_numOfRows;
                             $index = 1;
@@ -228,7 +232,6 @@ if ($val[8] == 'M') {
                                     $index++;
                                 }
                             } else {
-                                echo "<p>No images yet.</p>";
                             }
                             ?>
 

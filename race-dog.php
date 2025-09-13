@@ -152,7 +152,7 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                                 <div class="information-system" style="margin-bottom: 1rem;">
                                     <div class="container-xl">
                                         <div class="card-block">
-                                            <div class="row g-lg-4 g-3">
+                                            <div class="row g-lg-5 g-4">
                                                 <? foreach ($query as $Key) { ?>
                                                     <div class="col-xxl-4 col-sm-6">
                                                         <div class="wrapper" style="border-radius:40px">
