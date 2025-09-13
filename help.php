@@ -40,6 +40,9 @@ if ($search <> "") {
     " . $table . "_subject LIKE '%$search%'
     ) ";
 }
+if ($_SESSION['core_session_flogout'] >= 1) {
+    $sql .= "  AND  " . $table . "_creby != '" . $_SESSION['core_session_fid'] . "' ";
+}
 
 $sql .= "ORDER BY " . $table . "_id DESC ";
 $query = QueryDB($coreLanguageSQL, $sql);
@@ -71,6 +74,8 @@ $slect_data2[$table  . "_pic as " . substr("_pic", 1)] = "";
 $slect_data2[$table  . "_lastdate as " . substr("_lastdate", 1)] = "";
 $slect_data2[$table  . "_spot as " . substr("_spot", 1)] = "";
 $sql2 = "SELECT \n" . implode(",\n", array_keys($slect_data2)) . " FROM " . $table . " WHERE " . $table . "_status = 'Success' ";
+
+
 $sql2 .= "ORDER BY " . $table . "_lastdate DESC ";
 $sql2 .= "LIMIT 0,5";
 $query2 = QueryDB($coreLanguageSQL, $sql2);
