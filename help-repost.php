@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <?php include('lib/connect.php');
-include('lib/session.php');
-?>
+include('lib/session.php'); ?>
 <html lang="en">
 <?php
 
 
-$table = "track";
+$table = "track_repost";
 $module_pagesize = "";
 $module_pageshow = "";
 $module_orderby = "";
-$module_default_pagesize = 10;
+$module_default_pagesize = 9;
 $module_default_pageshow = 1;
 
 if ($module_pagesize == "") {
@@ -29,18 +28,10 @@ if ($_REQUEST['search'] != "") {
 $slect_data = array();
 $slect_data[$table . "_id as " . substr("_id", 1)] = "";
 $slect_data[$table  . "_subject as " . substr("_subject", 1)] = "";
-$slect_data[$table  . "_spot as " . substr("_spot", 1)] = "";
 $slect_data[$table  . "_pic as " . substr("_pic", 1)] = "";
-$slect_data[$table  . "_status as " . substr("_status", 1)] = "";
 $slect_data[$table  . "_credate as " . substr("_credate", 1)] = "";
-$sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table;
-$sql .= " WHERE " . $table . "_creby =" . $_SESSION['core_session_fid'] . " ";
+$sql = "SELECT \n" . implode(",\n", array_keys($slect_data)) . " FROM " . $table . " WHERE " . $table . "_cid = '".$_REQUEST['id']."' ";
 
-if ($search <> "") {
-    $sql = $sql . "  AND  (
-    " . $table . "_subject LIKE '%$search%'
-    ) ";
-}
 
 $sql .= "ORDER BY " . $table . "_id DESC ";
 $query = QueryDB($coreLanguageSQL, $sql);
@@ -60,7 +51,7 @@ if ($module_pageshow > $numberofpage) {
 // Select only paging range #########################
 $recordstart = ($module_pageshow - 1) * $module_pagesize;
 $sql .= "LIMIT $recordstart , $module_pagesize";
-// print_pre($sql);
+
 $query = QueryDB($coreLanguageSQL, $sql);
 // print_pre($sql);
 $count_record = NumRowsDB($coreLanguageSQL, $query);
@@ -92,10 +83,16 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
             transform: scale(1.2);
         }
 
-        .table th,
-        .table td {
-            vertical-align: middle !important;
-            /* จัดกึ่งกลางแนวตั้ง */
+        .card-block .wrapper .link .title-bottom::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            transition: opacity 0.2s linear;
+            opacity: 0;
         }
     </style>
 </head>
@@ -104,18 +101,16 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
 
     <div class="global-container">
         <?php include('inc/header.php'); ?>
-        <!-- แสดงประวัติการขอความช่วยเหลือของผู้ใช้ สามารถค้นหา ดูสถานะ และแจ้งเมื่อพบสัตว์เลี้ยงแล้ว -->
+
 
         <section class="layout-container ">
             <form action="?" method="post" name="myForm" id="myForm">
                 <input name="module_pageshow" type="hidden" id="module_pageshow" value="<?php echo  $module_pageshow ?>" />
                 <input name="module_pagesize" type="hidden" id="module_pagesize" value="<?php echo  $module_pagesize ?>" />
-                <input name="selectid" type="hidden" id="selectid" value="" />
-
                 <div class="default-header">
                     <div class="wrapper">
                         <div class="container">
-                            <div class="title  text-center">ประวัติการขอความช่วยเหลือ</div>
+                            <div class="title  text-center">เบาะแสสัตว์เลี้ยงสูญหาย</div>
                             <!-- <div class="text-center txt-desc" style="color: white;line-height: 1.5rem;">สำหรับผู้เลี้ยงสุนัขและแมวมือใหม่ที่คิดจะเลี้ยงสุนัขและแมว อาจจะไม่สามารถแยกสายพันธุ์ของสุนัขและแมวได้ 
                         ไม่ทราบปัญหาเกี่ยวกับวิธีการเลี้ยงดูของสัตว์เลี้ยง และนิสัยของสุนัขและแมวแต่ละสายพันธุ์ ทำให้เกิดปัญหามากมายเกี่ยวกับสุขภาพของสุนัขและแมว 
                         ทำให้สุนัขและแมวมีอายุที่สั้นลงหรือถูกเลี้ยงแบบผิดวิธี ดังนั้นจึงพัฒนาเว็บแอปพลิเคชันเพื่อรวบรวมข้อมูลการเลี้ยงสุนัขและแมวและการให้คำแนะนำเกี่ยวกับอาการของสุนัขและแมว 
@@ -131,93 +126,48 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
 
                 <div class="default-page news-page" style="margin: 6rem 0;">
                     <div class="news-list">
-
                         <div class="container-xl">
+                            
 
-                            <div class="row" style="margin-bottom: 1.5rem;">
-                                <!-- column -->
-                                <div class="col">
-                                    <div class="subtitle typo-md fw-bold text-secondary">
-                                        ประวัติการขอความช่วยเหลือ
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="search" name="search" placeholder="ค้นหา" value="<?php echo  trim($_REQUEST['search']) ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-1">
-                                    <button type="button" onClick="document.myForm.submit();" class="btn shadow-lg" style="background-color: #ffff;height:38px;min-width:auto;line-height:0;border-radius:5px">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th scope="col">#</th>
-                                        <th scope="col">ชื่อ</th>
-                                        <th scope="col">สถานะ</th>
-                                        <th scope="col">วันที่</th>
-                                        <th scope="col">ภารกิจเสร็จสมบูรณ์</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 1;
-                                    if ($count_totalrecord > 0) { ?>
-                                        <? foreach ($query as $Key) {
-                                            if ($Key[4] == "Approve") {
-                                                $valStatusClass = "fontContantTbEnable";
-                                                $valStatusName = "อนุมัติ";
-                                            } else if ($Key[4] == "Denine") {
-                                                $valStatusClass = "fontContantTbDisable";
-                                                $valStatusName = "ไม่อนุมัติ";
-                                            } else {
-                                                $valStatusClass = "fontContantTbSuccess";
-                                                $valStatusName = "สำเร็จ";
-                                            }
-                                        ?>
-                                            <tr class="text-center">
-                                                <th scope="row"><? echo $i ?></th>
-                                                <td>
-                                                    <!-- Card -->
-                                                    <div class="col">
-                                                        <a href="help-detail-repost.php?id=<?php echo $Key[0] ?>" class="link" style="text-decoration:none;">
-                                                            <div class="card shadow-lg h-100" style="max-width: 250px; margin:auto;">
-                                                                <?php if (is_file('upload/track/' . $Key[3])) { ?>
-                                                                    <img src="<?php echo $core_template; ?>upload/track/<?php echo $Key[3] ?>"
-                                                                        class="card-img-top img-fluid"
-                                                                        style="height:180px; object-fit:cover;"
-                                                                        alt="">
-                                                                <?php } else { ?>
-                                                                    <img src="<?php echo $core_template; ?>assets/img/static/nopic.png"
-                                                                        class="card-img-top img-fluid"
-                                                                        style="height:180px; object-fit:cover;"
-                                                                        alt="">
-                                                                <?php } ?>
-                                                                <div class="card-body text-center">
-                                                                    <h6 class="card-title text-truncate" style="max-width:200px;"><?php echo $Key[1] ?></h6>
+                            <?php if ($count_totalrecord > 0) { ?>
+                                <div class="information-system" style="margin-bottom: 1rem;">
+                                    <div class="container-xl">
+                                        <div class="card-block">
+                                            <div class="row g-lg-4 g-3">
+                                                <? foreach ($query as $Key) { ?>
+                                                    <div class="col-xxl-4 col-sm-6">
+                                                        <div class="wrapper" style="border-radius:40px">
+                                                            <a href="help-detail-repost-final.php?id=<?php echo $Key[0] ?>" class="link">
+                                                                <div class="thumbnail">
+                                                                    <figure class="cover">
+                                                                        <?php if (is_file('upload/track/repost/' . $Key[2])) { ?>
+                                                                            <img src="<?php echo $core_template; ?>upload/track/repost/<?php echo $Key[2] ?>" class="img-cover lazy loaded" alt="">
+                                                                        <?php } else { ?>
+                                                                            <img src="<?php echo $core_template; ?>assets/img/static/nopic.png" class="img-cover lazy loaded" alt="">
+                                                                        <?php } ?>
+                                                                    </figure>
                                                                 </div>
-                                                            </div>
-                                                        </a>
+                                                                <div class="title-bottom" style="background: black;">
+                                                                    <div class="row align-items-center gutters-10">
+                                                                        <div class="col">
+                                                                            <div class="card-txt text-limit -x2" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><? echo $Key[1] ?> <? echo dateFormatReal($Key[3]) ?></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="desc typo-default fw-normal">
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
                                                     </div>
-
-
-                                                </td>
-                                                <td class="<? echo $valStatusClass ?>"><? echo $valStatusName ?></td>
-                                                <td><? echo dateFormatReal($Key[5]) ?></td>
-                                                <? if ($Key[4] == "Success") { ?>
-                                                    <td><span style="color: green;">เจอเจ้าของแล้ว</span></td>
-                                                <? } else { ?>
-                                                    <td><a href="javascript:void(0)" onclick="document.myForm.selectid.value=<?php echo  $Key[0] ?>;success('success.php');" style="text-decoration: none;color:black;">คลิกเมื่อ เจอสัตว์เลี้ยงแล้ว</a></td>
                                                 <? } ?>
-                                            </tr>
-                                        <? $i++;
-                                        } ?>
-                                    <? } ?>
-                                </tbody>
-                            </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <? } else { ?>
+                                <p class="text-center">ไม่มีข้อมูล</p>
+                            <? } ?>
 
 
                         </div>
