@@ -187,9 +187,9 @@ if ($val[8] == 'M') {
                         <div class="subtitle typo-sm fw-bold text-secondary">
                             บริเวณหาย : <span class="fw-normal text-dark"><? echo $val[10] ?></span>
                         </div>
-                        <div class="subtitle typo-sm fw-bold text-secondary">
+                        <!-- <div class="subtitle typo-sm fw-bold text-secondary">
                             อีเมลติดต่อ : <span class="fw-normal text-dark"><a href="mailto:<? echo $val[12] ?>" target="_blank"><? echo $val[12] ?></a></span>
-                        </div>
+                        </div> -->
 
 
                         <!-- ck editor -->

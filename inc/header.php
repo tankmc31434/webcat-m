@@ -7,7 +7,7 @@ include("./lib/session.php");
         <div class="container-xl">
             <a class="navbar-brand animate__animated animate__slideInDown" href="index.php">
                 <div class="vstack gap-xxl-3 gap-2">
-                    <img src="<?php echo $core_template; ?>assets/img/static/CATDOG.png" class="brand" />
+                    <img src="<?php echo $core_template; ?>assets/img/static/CATDOG.png" class="brand" style="width: 220px;px; height:auto;" />
                 </div>
             </a>
             <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

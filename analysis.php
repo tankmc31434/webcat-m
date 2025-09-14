@@ -35,7 +35,6 @@ include('lib/connect.php'); ?>
             /* green-ish */
         }
 
-
         form {
             margin-top: 12px;
             display: flex;
@@ -109,7 +108,7 @@ include('lib/connect.php'); ?>
                                 <i class="fa fa-paw" style="color: #867070;font-size:5rem;" aria-hidden="true"></i>
                                 <br>
                                 <br>
-                                วิเคราะห์โรคสัตว์เลี้ยงเบื้องต้น
+                                กรอกคำถามหรืออาการที่เกี่ยวข้องกับสัตว์เลี้ยง เพื่อรับการวินิจฉัยโรคเบื้องต้นและคำแนะนำจาก AI
                             </div>
                         </div>
                         <div class="row py-2">
@@ -117,7 +116,8 @@ include('lib/connect.php'); ?>
                                 <div id="messages" class="mb-2 fs-4"></div>
 
                                 <div id="chat" class="mb-3 fs-4"></div>
-                                <input class="fs-3" type="text" id="input" placeholder="พิมพ์คำถาม..." onkeypress="if(event.key==='Enter') sendMessage()">
+                                <textarea class="fs-3" id="input" placeholder="พิมพ์คำถาม..." rows="3" style="width:70%;" onkeypress="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
+                            <div class="mb-3 fs-4 d-flex justify-content-center">
                                 <button class="fs-4" onclick="sendMessage()">ส่ง</button>
                             </div>
                         </div>
@@ -159,7 +159,7 @@ include('lib/connect.php'); ?>
         async function sendMessage() {
             let msg = document.getElementById("input").value;
             if (!msg) return;
-            document.getElementById("chat").innerHTML += `<div class="user mb-3 fs-4"><b>คุณ:</b> ${msg}</div>`;
+            document.getElementById("chat").innerHTML += `<div class="user mb-3 fs-4 p-2"><b>คุณ:</b> ${msg}</div>`;
 
             let res = await fetch("chat.php", {
                 method: "POST",
@@ -173,7 +173,7 @@ include('lib/connect.php'); ?>
             let data = await res.json();
             console.log(data);
 
-            document.getElementById("chat").innerHTML += `<div class="bot mb-3 fs-4"><b>บอท:</b> ${data.reply}</div>`;
+            document.getElementById("chat").innerHTML += `<div class="bot mb-3 fs-4 text-start lh-base" style="word-break: break-word; white-space: pre-line;"><b>บอท:</b> ${data.reply}</div>`;
             document.getElementById("input").value = "";
             document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
         }

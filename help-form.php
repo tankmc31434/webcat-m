@@ -172,7 +172,14 @@ $myid = rand();
             filebrowserUploadMethod: 'form',
             filebrowserUploadUrl: 'ckupload.php',
             height: 500,
-
+            fontSize_sizes: '16/16px;18/18px;20/20px;24/24px;28/28px;32/32px;36/36px;48/48px;',
+            toolbar: [
+            { name: 'styles', items: [ 'FontSize' ] },
+            { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline' ] },
+            { name: 'paragraph', items: [ 'NumberedList', 'BulletedList' ] },
+            { name: 'insert', items: [ 'Image', 'Table' ] },
+            { name: 'tools', items: [ 'Maximize' ] }
+            ]
         });
 
         // Upload file

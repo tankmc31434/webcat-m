@@ -91,33 +91,26 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
 
         /* Lightbox */
         .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;   /* จัดแนวนอนตรงกลาง */
+        align-items: center;       /* จัดแนวตั้งตรงกลาง */
+    }
 
-        .lightbox img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-        }
+    .lightbox img {
+        max-width: 90vw;
+        max-height: 80vh;
+        border-radius: 10px;
+        display: block;
+        margin: auto;
+    }
 
-        .lightbox span {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            font-size: 40px;
-            color: white;
-            cursor: pointer;
-        }
     </style>
 </head>
 
@@ -202,8 +195,8 @@ $query2 = QueryDB($coreLanguageSQL, $sql2);
                             บริเวณหาย : <span class="fw-normal text-dark"><? echo $val[10] ?></span>
                         </div>
                         <div class="subtitle typo-sm fw-bold text-secondary">
-                            อีเมลติดต่อ : <span class="fw-normal text-dark"><a href="mailto:<? echo $val[12] ?>" target="_blank"><? echo $val[12] ?></a></span>
-                        </div>
+                            <!-- อีเมลติดต่อ : <span class="fw-normal text-dark"><a href="mailto:<? echo $val[12] ?>" target="_blank"><? echo $val[12] ?></a></span>
+                        </div> -->
 
 
                         <!-- ck editor -->
