@@ -201,6 +201,14 @@ $count_record = NumRowsDB($coreLanguageSQL, $query);
                                                                 </div>
                                                             </div>
                                                         </a>
+                                                        <!-- ปุ่มแก้ไข -->
+                                                        <div class="text-center mt-2">
+                                                            <a href="help-edit.php?id=<?php echo $Key[0] ?>"
+                                                                class="btn btn-sm btn-outline-primary"
+                                                                title="แก้ไข">
+                                                                <i class="fa fa-edit"></i> แก้ไข
+                                                            </a>
+                                                        </div>
                                                     </div>
 
 
